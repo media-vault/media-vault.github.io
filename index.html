@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MediaVault | Private Repository</title>
+  <link rel="icon" type="image/png" sizes="64x64" href="https://drive.google.com/file/d/1MzWOQXucY9-Rs9rUNP-njbT08kQP3-Px/view?usp=drivesdk">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -14,19 +16,40 @@
         .no-scrollbar::-webkit-scrollbar { width: 5px; }
         .no-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .no-scrollbar::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 10px; }
+      .discord-btn { 
+    background: rgba(88, 101, 242, 0.1); 
+    border: 1px solid rgba(88, 101, 242, 0.2); 
+    color: #5865F2; 
+    transition: all 0.3s ease; 
+}
+.discord-btn:hover { 
+    background: #5865F2; 
+    color: white; 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);
+}
+
     </style>
 </head>
 <body class="bg-grid text-slate-200 min-h-screen pb-20">
 
-    <nav class="border-b border-white/5 bg-slate-950/50 sticky top-0 z-50 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div><h1 class="text-2xl font-bold tracking-tight text-white">Media<span class="text-blue-500">Vault</span></h1></div>
-            <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-emerald-400 bg-emerald-400/10 px-3 py-1.5 rounded-full border border-emerald-400/20">
-                <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span> 
-                <span>Vault Online</span>
-            </div>
+<nav class="border-b border-white/5 bg-slate-950/50 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div>
+            <h1 class="text-2xl font-bold tracking-tight text-white">Media<span class="text-blue-500">Vault</span></h1>
         </div>
-    </nav>
+        
+        <div class="flex items-center">
+            <a href="YOUR_DISCORD_INVITE_LINK" target="_blank" class="discord-btn px-5 py-2 rounded-xl text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-lg shadow-indigo-500/10 transition-all hover:-translate-y-0.5">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path>
+                </svg>
+                <span>Join Discord</span>
+            </a>
+        </div>
+    </div>
+</nav>
+
 
     <header class="max-w-7xl mx-auto px-6 pt-16 pb-12 text-center">
         <h2 class="text-5xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">The Golden Age <br><span class="text-blue-500">In Your Pocket.</span></h2>
@@ -75,6 +98,24 @@
     </div>
 
     <main id="vaultGrid" class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="ps1">
+    <div>
+        <div class="flex justify-between items-center mb-4">
+            <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-[10px] font-bold uppercase rounded-full border border-amber-500/20">PS1 ROM</span>
+            <span class="text-slate-500 text-xs font-mono">50 MB</span>
+        </div>
+        <h3 class="game-title text-xl font-bold mb-2 text-white">Batman Forever: The Arcade Game</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">Over-the-top beat 'em up action. Ready to play on emulators like RetroArch.</p>
+    </div>
+    <div class="space-y-3">
+        <a href="https://drive.google.com/u/0/uc?id=1MpED4Yv3J9BCFU-PbJMN1_8XKhRpCJV6&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
+        
+        <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">⚡ SUPPORT THE VAULT</a>
+    </div>
+</div>
+
+      
         <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
     <div>
         <div class="flex justify-between items-center mb-4">
@@ -85,7 +126,7 @@
         <p class="text-slate-400 text-sm leading-relaxed mb-6">The ultimate physics-based sandbox action game. Full 6.8GB archive with total interaction freedom.</p>
     </div>
     <div class="space-y-3">
-        <a href="https://drive.google.com/u/0/uc?id=1Z0GRCrD3Ce85q2iDAFAc-K-hxzDMUgrL&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">🚀 Direct Download</a>
+        <a href="https://drive.google.com/u/0/uc?id=1Z0GRCrD3Ce85q2iDAFAc-K-hxzDMUgrL&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
         
         <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">⚡ FREE SUPPORT (AD-CLICK)</a>
     </div>
