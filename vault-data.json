@@ -179,13 +179,4 @@
         "driveId": "PASTE_YOUR_ID_HERE",
         "desc": "The ultimate VR combat simulator. Physics-based mayhem and realistic swordplay."
     },
-    {
-        "title": "Test",
-        "size": "Test",
-        "type": "pc",
-        "tag": "PC Game",
-        "tagColor": "cyan",
-        "driveId": "Test",
-        "desc": "Test"
-    }
 ]
