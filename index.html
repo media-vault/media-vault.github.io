@@ -99,297 +99,69 @@
 </div>
 
 <main id="vaultGrid" class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    </main>
 
-<div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="pc">
-    <div>
-        <div class="flex justify-between items-center mb-4">
-            <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase rounded-full border border-cyan-500/20">PC Game</span>
-            <span class="text-slate-500 text-xs font-mono">300 MB</span>
-        </div>
-        <h3 class="game-title text-xl font-bold mb-2 text-white">Geometry Dash</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-6">Jump and fly your way through danger in this rhythm-based action platformer. Simple one-touch gameplay with levels that will keep you entertained for hours.</p>
-    </div>
-    <div class="space-y-3">
-        <a href="https://drive.google.com/u/0/uc?id=1LK1UVPEInCv4Xbp76dOEJGU8e5KdkeOD&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
-        <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">⚡ SUPPORT THE VAULT</a>
-    </div>
-</div>
+<script>
+    // 1. The Automation Engine
+    async function loadVault() {
+        try {
+            const response = await fetch('./vault-data.json');
+            const games = await response.json();
+            const grid = document.getElementById('vaultGrid');
+            
+            grid.innerHTML = games.map(game => `
+                <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="${game.type}">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="px-3 py-1 bg-${game.tagColor}-500/10 text-${game.tagColor}-400 text-[10px] font-bold uppercase rounded-full border border-${game.tagColor}-500/20">
+                                ${game.tag}
+                            </span>
+                            <span class="text-slate-500 text-xs font-mono">${game.size}</span>
+                        </div>
+                        <h3 class="game-title text-xl font-bold mb-2 text-white">${game.title}</h3>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">${game.desc}</p>
+                    </div>
+                    <div class="space-y-3">
+                        <a href="https://drive.google.com/u/0/uc?id=${game.driveId}&export=download" 
+                           class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">
+                           Direct Download
+                        </a>
+                        <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" 
+                           target="_blank" 
+                           class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">
+                           ⚡ SUPPORT THE VAULT
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+        } catch (error) {
+            console.error("Vault failed to load:", error);
+        }
+    }
 
-  
-<div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="pc">
-    <div>
-        <div class="flex justify-between items-center mb-4">
-            <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase rounded-full border border-cyan-500/20">PC Game</span>
-            <span class="text-slate-500 text-xs font-mono">500 MB</span>
-        </div>
-        <h3 class="game-title text-xl font-bold mb-2 text-white">Among Us</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-6">The ultimate social deduction game. Work with your crewmates to complete tasks, but watch your back for the impostor.</p>
-    </div>
-    <div class="space-y-3">
-        <a href="https://drive.google.com/u/0/uc?id=1zQJa7fBDrjjM3VDDIMK1WF81DmNG4V2y&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
-        <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">⚡ SUPPORT THE VAULT</a>
-    </div>
-</div>
+    // Initialize the vault on load
+    loadVault();
 
-  
-      <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="pc">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase rounded-full border border-cyan-500/20">PC Game</span>
-                <span class="text-slate-500 text-xs font-mono">200 MB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">People Playground</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">A physics-based sandbox focused on creative experimentation. Total freedom to build, test, and destroy.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/u/0/uc?id=1OWgRj7teYchFW6CIHGP9dwD5TlysupMK&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">⚡ SUPPORT THE VAULT</a>
-        </div>
-    </div>
+    // 2. Keep your Search and Filter functions (they still work with this!)
+    function toggleFilterMenu() { document.getElementById('filterMenu').classList.toggle('hidden'); }
+    
+    function filterType(type, label) {
+        document.querySelector('#filterBtnLabel span').innerText = label;
+        document.getElementById('filterMenu').classList.add('hidden');
+        const cards = document.querySelectorAll('.file-item');
+        cards.forEach(card => card.style.display = (type === 'all' || card.getAttribute('data-type') === type) ? 'flex' : 'none');
+    }
 
+    function searchVault() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.file-item');
+        cards.forEach(card => {
+            const title = card.querySelector('.game-title').innerText.toLowerCase();
+            card.style.display = title.includes(input) ? 'flex' : 'none';
+        });
+    }
+</script>
 
-      <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase rounded-full border border-purple-500/20">Quest APK</span>
-                <span class="text-slate-500 text-xs font-mono">400 MB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">Taxi Driver VR</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">Experience the life of a city cabbie in immersive VR.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/u/0/uc?id=1Re1GJTFaBy-CdD8aoF9CDQ6gV0axcfPT&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">⚡ SUPPORT THE VAULT</a>
-        </div>
-    </div>
-
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="ps1">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-amber-500/10 text-amber-400 text-[10px] font-bold uppercase rounded-full border border-amber-500/20">PS1 ROM</span>
-                <span class="text-slate-500 text-xs font-mono">50 MB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">Batman Forever: The Arcade Game</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">Over-the-top beat 'em up action. Ready to play on emulators like RetroArch.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/u/0/uc?id=1MpED4Yv3J9BCFU-PbJMN1_8XKhRpCJV6&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">⚡ SUPPORT THE VAULT</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase rounded-full border border-purple-500/20">Quest APK</span>
-                <span class="text-slate-500 text-xs font-mono">6.8 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">BONELAB</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">The ultimate physics-based sandbox action game. Full 6.8GB archive.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/u/0/uc?id=1Z0GRCrD3Ce85q2iDAFAc-K-hxzDMUgrL&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-[10px] uppercase tracking-wider">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase rounded-full border border-purple-500/20">Quest APK</span>
-                <span class="text-slate-500 text-xs font-mono">8 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">Resident Evil 4 VR</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">Survival horror masterpiece rebuilt for VR. Face the Las Plagas.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/u/0/uc?id=1FSADCuLMm9xeQr77yPJFX8rq7kREy2K0&export=download" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase rounded-full border border-purple-500/20">Quest APK</span>
-                <span class="text-slate-500 text-xs font-mono">1.8 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">FNAF: Help Wanted</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">The ultimate VR horror experience. Face your fears in classic mini-games.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1LGMraXeA5l-Uls6JayO_XVPy1LBve17w" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase rounded-full border border-purple-500/20">Quest APK</span>
-                <span class="text-slate-500 text-xs font-mono">2.5 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">Green Hell VR</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">The ultimate survival simulator in the Amazonian jungle. Hunt and craft.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1Q0nssrw16yIVZaob8GAtjPgIFHwqP8Vz" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase rounded-full border border-purple-500/20">Quest APK</span>
-                <span class="text-slate-500 text-xs font-mono">2.2 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">I Am Cat</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">The ultimate feline simulator. Cause chaos and live your best cat life.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1bvHucx7wI3LnTKxnXxtBfdrrmkLwjEyS" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase rounded-full border border-purple-500/20">Quest APK</span>
-                <span class="text-slate-500 text-xs font-mono">1 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">I Expect You To Die 3</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">VR spy-themed escape-the-room puzzles. Stop Dr. Roxana Prism.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1CFJj8n2AyAGMyclg2V3e9Z0VPMQstCp2" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="psp">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase rounded-full border border-blue-500/30">PSP ISO</span>
-                <span class="text-slate-500 text-xs font-mono">600 MB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">GTA: Liberty City Stories</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">Return to Liberty City. Handheld open-world classic.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1y8C8V1R_rLBljP6Or81kfROqsUNOyw4i" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="pc">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 text-[10px] font-bold uppercase rounded-full border border-cyan-500/20">Studio Pick</span>
-                <span class="text-slate-500 text-xs font-mono">1.2 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">Hollow Knight</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">Masterpiece 2D action. Explore the depths of Hallownest.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1LP1-CJrphR-FowBA0B538vVR-MF31UVl" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="pc">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase rounded-full border border-emerald-500/20">PC Classic</span>
-                <span class="text-slate-500 text-xs font-mono">660 MB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">Resident Evil 3</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">Original PC version. Optimized for modern systems.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1dxmknCIFtwcFITvylTCxDqdw4f_lH8xS" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="ps1">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-gray-500/10 text-gray-400 text-[10px] font-bold uppercase rounded-full border border-gray-500/20">PS1 ROM</span>
-                <span class="text-slate-500 text-xs font-mono">380 MB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">RE3: Nemesis</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">The original PlayStation experience. Escape the pursuer.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1StGvQ63hrJKbsToYtI7jJRl7RzFwE9Sz" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="psp">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase rounded-full border border-blue-500/20">PSP ISO</span>
-                <span class="text-slate-500 text-xs font-mono">1.2 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">FIFA Soccer 06</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">Classic football on the go. High-speed sport action.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1e7i85zRnqGGlXzY0bmY3l78dRiEbbdRf" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="psp">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase rounded-full border border-blue-500/20">PSP ISO</span>
-                <span class="text-slate-500 text-xs font-mono">1.2 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">GoW: Chains of Olympus</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">Kratos' legendary handheld debut. Brutal combat.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1gmvuvWdtlw5fDYySe2W3CCPbjda7kuFU" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="psp">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-blue-500/10 text-blue-400 text-[10px] font-bold uppercase rounded-full border border-blue-500/20">PSP ISO</span>
-                <span class="text-slate-500 text-xs font-mono">1.1 GB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">GoW: Ghost of Sparta</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">The second brutal PSP chapter. Kratos seeks the truth.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1-CiqzzPIaHM8Q0O9o88wvYvEG6958dg9" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-    <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="quest">
-        <div>
-            <div class="flex justify-between items-center mb-4">
-                <span class="px-3 py-1 bg-purple-500/10 text-purple-400 text-[10px] font-bold uppercase rounded-full border border-purple-500/20">Quest APK</span>
-                <span class="text-slate-500 text-xs font-mono">450 MB</span>
-            </div>
-            <h3 class="game-title text-xl font-bold mb-2 text-white">Shave 'n' Stuff</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-6">VR Barber simulation. Fun, frantic, and oddly satisfying.</p>
-        </div>
-        <div class="space-y-3">
-            <a href="https://drive.google.com/uc?export=download&id=1p8WKFaNx088fjemxOcBFJnk4DQCFrydL" class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm">Direct Download</a>
-            <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="block w-full border border-blue-500/30 hover:bg-blue-500/10 text-blue-400 text-center py-3 rounded-2xl font-bold transition-all text-xs">⚡ FREE SUPPORT (AD-CLICK)</a>
-        </div>
-    </div>
-
-</main>
 
 <footer class="max-w-7xl mx-auto px-6 mt-32 py-12 border-t border-white/5 text-center">
     <p class="text-slate-500 text-[10px] uppercase tracking-[0.2em] font-bold">MediaVault Archive © 2026</p>
