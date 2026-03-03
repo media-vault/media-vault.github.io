@@ -169,14 +169,5 @@
         "tagColor": "purple",
         "driveId": "1p8WKFaNx088fjemxOcBFJnk4DQCFrydL",
         "desc": "VR Barber simulation. Fun, frantic, and oddly satisfying."
-    },
-    {
-        "title": "Blade and Sorcery: Nomad",
-        "size": "2.5 GB",
-        "type": "quest",
-        "tag": "Quest APK",
-        "tagColor": "purple",
-        "driveId": "PASTE_YOUR_ID_HERE",
-        "desc": "The ultimate VR combat simulator. Physics-based mayhem and realistic swordplay."
     }
 ]
