@@ -2,8 +2,8 @@
     {
         "title": "Hello",
         "size": "123",
-        "type": "Other",
-        "tag": "PC Game",
+        "type": "other",
+        "tag": "Other",
         "tagColor": "cyan",
         "driveId": "Idk",
         "desc": "67"
