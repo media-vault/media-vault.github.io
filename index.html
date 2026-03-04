@@ -103,27 +103,42 @@
     </main>
 
 <script>
-    // 1. The Automation Engine
+    // 1. The Smart Automation Engine
     async function loadVault() {
         try {
-            const response = await fetch('./vault-data.json');
+            // Using a cache-buster to ensure the website always pulls the latest JSON from GitHub
+            const response = await fetch('./vault-data.json?v=' + Date.now());
             const games = await response.json();
             const grid = document.getElementById('vaultGrid');
             
-            grid.innerHTML = games.map(game => `
-                <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="${game.type}">
+            grid.innerHTML = games.map(game => {
+                // SMART LINK LOGIC:
+                // If 'url' exists, use it. If not, use 'driveId' to build the link.
+                let finalDownloadUrl = "";
+                
+                if (game.url && game.url.startsWith('http')) {
+                    finalDownloadUrl = game.url;
+                } else if (game.driveId) {
+                    finalDownloadUrl = `https://drive.google.com/u/0/uc?id=${game.driveId}&export=download`;
+                } else {
+                    finalDownloadUrl = "#"; // Fallback if link is missing
+                }
+
+                return `
+                <div class="file-item glass-card p-6 rounded-3xl flex flex-col justify-between" data-type="${game.type || 'other'}">
                     <div>
                         <div class="flex justify-between items-center mb-4">
-                            <span class="px-3 py-1 bg-${game.tagColor}-500/10 text-${game.tagColor}-400 text-[10px] font-bold uppercase rounded-full border border-${game.tagColor}-500/20">
-                                ${game.tag}
+                            <span class="px-3 py-1 bg-${game.tagColor || 'blue'}-500/10 text-${game.tagColor || 'blue'}-400 text-[10px] font-bold uppercase rounded-full border border-${game.tagColor || 'blue'}-500/20">
+                                ${game.tag || 'Vault'}
                             </span>
-                            <span class="text-slate-500 text-xs font-mono">${game.size}</span>
+                            <span class="text-slate-500 text-xs font-mono">${game.size || 'N/A'}</span>
                         </div>
                         <h3 class="game-title text-xl font-bold mb-2 text-white">${game.title}</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">${game.desc}</p>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">${game.desc || 'No description available.'}</p>
                     </div>
                     <div class="space-y-3">
-                        <a href="https://drive.google.com/u/0/uc?id=${game.driveId}&export=download" 
+                        <a href="${finalDownloadUrl}" 
+                           ${finalDownloadUrl !== "#" ? 'target="_blank"' : ''}
                            class="block w-full bg-blue-600 hover:bg-blue-500 text-white text-center py-3 rounded-2xl font-bold transition-all text-sm shadow-lg shadow-blue-600/20">
                            Direct Download
                         </a>
@@ -134,15 +149,16 @@
                         </a>
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         } catch (error) {
             console.error("Vault failed to load:", error);
+            document.getElementById('vaultGrid').innerHTML = `<p class="text-center text-red-400 col-span-full">Failed to sync with repository database.</p>`;
         }
     }
 
     // Initialize the vault on load
     loadVault();
-
     // 2. Keep your Search and Filter functions (they still work with this!)
     function toggleFilterMenu() { document.getElementById('filterMenu').classList.toggle('hidden'); }
     
