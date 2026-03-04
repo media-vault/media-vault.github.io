@@ -1,14 +1,5 @@
 [
     {
-        "title": "Hello",
-        "size": "123",
-        "type": "other",
-        "tag": "Other",
-        "tagColor": "cyan",
-        "driveId": "Idk",
-        "desc": "67"
-    },
-    {
         "title": "Geometry Dash",
         "size": "300 MB",
         "type": "pc",
