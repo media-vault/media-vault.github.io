@@ -1,5 +1,14 @@
 [
     {
+        "title": "Test",
+        "size": "N/A",
+        "type": "Other",
+        "tag": "PC Game",
+        "tagColor": "cyan",
+        "driveId": "N/A",
+        "desc": ""
+    },
+    {
         "title": "Geometry Dash",
         "size": "300 MB",
         "type": "pc",
