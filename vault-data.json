@@ -1,5 +1,14 @@
 [
     {
+        "title": "Test",
+        "size": "N/A",
+        "type": "pc",
+        "tag": "PC Game",
+        "tagColor": "cyan",
+        "desc": "N/A",
+        "driveId": "Hi"
+    },
+    {
         "title": "Job Simulator",
         "size": "1 GB",
         "type": "quest",
