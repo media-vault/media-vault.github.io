@@ -158,10 +158,9 @@
         "size": "1.2 GB",
         "type": "psp",
         "tag": "PSP ISO",
-        "tagColor": "blue",
-        "driveId": "1gmvuvWdtlw5fDYySe2W3CCPbjda7kuFU",
-        "cover": "https://www.honestgamers.com/images/assets/53/G/32970/2.jpg",
-        "desc": "Kratos' legendary handheld debut. Brutal combat."
+        "desc": "Kratos' legendary handheld debut. Brutal combat.",
+        "cover": "https://assets.altarofgaming.com/wp-content/uploads/2022/04/god-of-war-chains-of-olympus-game-cover-altar-of-gaming.jpg",
+        "driveId": "1gmvuvWdtlw5fDYySe2W3CCPbjda7kuFU"
     },
     {
         "title": "GoW: Ghost of Sparta",
