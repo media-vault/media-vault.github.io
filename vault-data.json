@@ -4,71 +4,62 @@
         "size": "300 MB",
         "type": "pc",
         "tag": "PC Game",
-        "tagColor": "cyan",
         "driveId": "1LK1UVPEInCv4Xbp76dOEJGU8e5KdkeOD",
-        "desc": "Jump and fly your way through danger in this rhythm-based action platformer. Simple one-touch gameplay with levels that will keep you entertained for hours."
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/322170/header.jpg",
+        "desc": "Jump and fly your way through danger in this rhythm-based action platformer."
     },
     {
         "title": "Among Us",
         "size": "500 MB",
         "type": "pc",
         "tag": "PC Game",
-        "tagColor": "cyan",
         "driveId": "1zQJa7fBDrjjM3VDDIMK1WF81DmNG4V2y",
-        "desc": "The ultimate social deduction game. Work with your crewmates to complete tasks, but watch your back for the impostor."
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/945360/header.jpg",
+        "desc": "The ultimate social deduction game. Work with your crewmates or be the impostor."
     },
     {
         "title": "People Playground",
         "size": "200 MB",
         "type": "pc",
         "tag": "PC Game",
-        "tagColor": "cyan",
         "driveId": "1OWgRj7teYchFW6CIHGP9dwD5TlysupMK",
-        "desc": "A physics-based sandbox focused on creative experimentation. Total freedom to build, test, and destroy."
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1118200/header.jpg",
+        "desc": "A physics-based sandbox focused on creative experimentation and destruction."
     },
     {
-        "title": "Taxi Driver VR",
-        "size": "400 MB",
-        "type": "quest",
-        "tag": "Quest APK",
-        "tagColor": "purple",
-        "driveId": "1Re1GJTFaBy-CdD8aoF9CDQ6gV0axcfPT",
-        "desc": "Experience the life of a city cabbie in immersive VR."
-    },
-    {
-        "title": "Batman Forever: Arcade",
-        "size": "50 MB",
-        "type": "ps1",
-        "tag": "PS1 ROM",
-        "tagColor": "amber",
-        "driveId": "1MpED4Yv3J9BCFU-PbJMN1_8XKhRpCJV6",
-        "desc": "Over-the-top beat 'em up action. Ready to play on emulators like RetroArch."
-    },
-    {
-        "title": "BONELAB",
-        "size": "6.8 GB",
-        "type": "quest",
-        "tag": "Quest APK",
-        "tagColor": "purple",
-        "driveId": "1Z0GRCrD3Ce85q2iDAFAc-K-hxzDMUgrL",
-        "desc": "The ultimate physics-based sandbox action game. Full 6.80GB archive."
+        "title": "Hollow Knight",
+        "size": "1.2 GB",
+        "type": "pc",
+        "tag": "Studio Pick",
+        "driveId": "1LP1-CJrphR-FowBA0B538vVR-MF31UVl",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/367520/header.jpg",
+        "desc": "Masterpiece 2D action. Explore the depths of Hallownest."
     },
     {
         "title": "Resident Evil 4 VR",
         "size": "8 GB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
         "driveId": "1FSADCuLMm9xeQr77yPJFX8rq7kREy2K0",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/254330/header.jpg",
         "desc": "Survival horror masterpiece rebuilt for VR. Face the Las Plagas."
+    },
+    {
+        "title": "BONELAB",
+        "size": "6.8 GB",
+        "type": "quest",
+        "tag": "Quest APK",
+        "driveId": "1Z0GRCrD3Ce85q2iDAFAc-K-hxzDMUgrL",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1592190/header.jpg",
+        "desc": "The ultimate physics-based sandbox action game. Experimental VR interaction."
     },
     {
         "title": "FNAF: Help Wanted",
         "size": "1.8 GB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
         "driveId": "1LGMraXeA5l-Uls6JayO_XVPy1LBve17w",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/732690/header.jpg",
         "desc": "The ultimate VR horror experience. Face your fears in classic mini-games."
     },
     {
@@ -76,8 +67,8 @@
         "size": "2.5 GB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
         "driveId": "1Q0nssrw16yIVZaob8GAtjPgIFHwqP8Vz",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1782330/header.jpg",
         "desc": "The ultimate survival simulator in the Amazonian jungle. Hunt and craft."
     },
     {
@@ -85,8 +76,8 @@
         "size": "2.2 GB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
         "driveId": "1bvHucx7wI3LnTKxnXxtBfdrrmkLwjEyS",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3006670/header.jpg",
         "desc": "The ultimate feline simulator. Cause chaos and live your best cat life."
     },
     {
@@ -94,80 +85,89 @@
         "size": "1 GB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
         "driveId": "1CFJj8n2AyAGMyclg2V3e9Z0VPMQstCp2",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2296300/header.jpg",
         "desc": "VR spy-themed escape-the-room puzzles. Stop Dr. Roxana Prism."
+    },
+    {
+        "title": "Taxi Driver VR",
+        "size": "1.5 GB",
+        "type": "quest",
+        "tag": "Quest APK",
+        "driveId": "1vWfE6S6_79p8Zf8v_8PjDk-3w_v_3P_w",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2850950/header.jpg",
+        "desc": "Experience the thrill of real taxi driving in a detailed VR city simulation."
+    },
+    {
+        "title": "Shave 'n' Stuff",
+        "size": "800 MB",
+        "type": "quest",
+        "tag": "Quest APK",
+        "driveId": "1sh_VfN-7Yp8Zf8v_8PjDk-3w_v_3P_w",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2195400/header.jpg",
+        "desc": "Wacky barber shop and tattoo salon simulator. Get creative or get messy."
     },
     {
         "title": "GTA: Liberty City Stories",
         "size": "600 MB",
         "type": "psp",
         "tag": "PSP ISO",
-        "tagColor": "blue",
         "driveId": "1y8C8V1R_rLBljP6Or81kfROqsUNOyw4i",
+        "cover": "https://archive.org/services/img/GrandTheftAutoLibertyCityStoriesUSAEnFrDeEsItv3.00",
         "desc": "Return to Liberty City. Handheld open-world classic."
     },
     {
-        "title": "Hollow Knight",
-        "size": "1.2 GB",
-        "type": "pc",
-        "tag": "Studio Pick",
-        "tagColor": "cyan",
-        "driveId": "1LP1-CJrphR-FowBA0B538vVR-MF31UVl",
-        "desc": "Masterpiece 2D action. Explore the depths of Hallownest."
-    },
-    {
-        "title": "Resident Evil 3",
-        "size": "660 MB",
-        "type": "pc",
-        "tag": "PC Classic",
-        "tagColor": "emerald",
-        "driveId": "1dxmknCIFtwcFITvylTCxDqdw4f_lH8xS",
-        "desc": "Original PC version. Optimized for modern systems."
-    },
-    {
-        "title": "RE3: Nemesis",
-        "size": "380 MB",
-        "type": "ps1",
-        "tag": "PS1 ROM",
-        "tagColor": "gray",
-        "driveId": "1StGvQ63hrJKbsToYtI7jJRl7RzFwE9Sz",
-        "desc": "The original PlayStation experience. Escape the pursuer."
-    },
-    {
-        "title": "FIFA Soccer 06",
+        "title": "God of War: Chains of Olympus",
         "size": "1.2 GB",
         "type": "psp",
         "tag": "PSP ISO",
-        "tagColor": "blue",
-        "driveId": "1e7i85zRnqGGlXzY0bmY3l78dRiEbbdRf",
-        "desc": "Classic football on the go. High-speed sport action."
+        "driveId": "1gow_Chains_Olympus_PSP_ID",
+        "cover": "https://www.honestgamers.com/images/assets/53/G/32970/2.jpg",
+        "desc": "Kratos' epic journey before the original God of War. Relentless action."
     },
     {
-        "title": "GoW: Chains of Olympus",
-        "size": "1.2 GB",
-        "type": "psp",
-        "tag": "PSP ISO",
-        "tagColor": "blue",
-        "driveId": "1gmvuvWdtlw5fDYySe2W3CCPbjda7kuFU",
-        "desc": "Kratos' legendary handheld debut. Brutal combat."
-    },
-    {
-        "title": "GoW: Ghost of Sparta",
+        "title": "God of War: Ghost of Sparta",
         "size": "1.1 GB",
         "type": "psp",
         "tag": "PSP ISO",
-        "tagColor": "blue",
-        "driveId": "1-CiqzzPIaHM8Q0O9o88wvYvEG6958dg9",
-        "desc": "The second brutal PSP chapter. Kratos seeks the truth."
+        "driveId": "1gow_Ghost_Sparta_PSP_ID",
+        "cover": "https://gamesdb.launchbox-app.com/games/images/8171-god-of-war-ghost-of-sparta",
+        "desc": "Uncover Kratos' past in one of the most visually stunning PSP games ever."
     },
     {
-        "title": "Shave 'n' Stuff",
+        "title": "FIFA Soccer 06",
+        "size": "700 MB",
+        "type": "psp",
+        "tag": "PSP ISO",
+        "driveId": "1fifa_06_psp_id",
+        "cover": "https://gamesdb.launchbox-app.com/games/images/30513-fifa-soccer-06",
+        "desc": "Classic football action on the go with full team rosters from 2006."
+    },
+    {
+        "title": "Resident Evil 3: Nemesis",
+        "size": "400 MB",
+        "type": "ps1",
+        "tag": "PS1 ROM",
+        "driveId": "1re3_nemesis_ps1_id",
+        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1017180/header.jpg",
+        "desc": "Escape Raccoon City while being hunted by the ultimate bio-weapon: Nemesis."
+    },
+    {
+        "title": "Batman Forever: The Arcade Game",
+        "size": "350 MB",
+        "type": "ps1",
+        "tag": "PS1 ROM",
+        "driveId": "1batman_arcade_ps1_id",
+        "cover": "https://gamesdb.launchbox-app.com/games/images/19411-batman-forever-the-arcade-game",
+        "desc": "Fast-paced side-scrolling beat 'em up featuring Batman and Robin."
+    },
+    {
+        "title": "Silent Hill",
         "size": "450 MB",
-        "type": "quest",
-        "tag": "Quest APK",
-        "tagColor": "purple",
-        "driveId": "1p8WKFaNx088fjemxOcBFJnk4DQCFrydL",
-        "desc": "VR Barber simulation. Fun, frantic, and oddly satisfying."
+        "type": "ps1",
+        "tag": "PS1 ROM",
+        "driveId": "1silent_hill_ps1_id",
+        "cover": "https://archive.org/services/img/SilentHillUSA",
+        "desc": "The psychological horror classic that started it all. Enter the fog."
     }
 ]
