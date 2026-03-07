@@ -2,6 +2,15 @@
     {
         "title": "partnerships",
         "size": "compress",
+        "type": "psp",
+        "tag": "PSP ISO",
+        "desc": "",
+        "cover": "Avon",
+        "driveId": "circuit"
+    },
+    {
+        "title": "partnerships",
+        "size": "compress",
         "type": "ps1",
         "tag": "PS1 ROM",
         "desc": "",
