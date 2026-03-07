@@ -92,10 +92,9 @@
         "size": "2.2 GB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
-        "driveId": "1bvHucx7wI3LnTKxnXxtBfdrrmkLwjEyS",
-        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/3006670/header.jpg",
-        "desc": "The ultimate feline simulator. Cause chaos and live your best cat life."
+        "desc": "The ultimate feline simulator. Cause chaos and live your best cat life.",
+        "cover": "https://voyglasses.com/cdn/shop/articles/Enjoy_I_Am_Cat_on_Meta_Quest_with_the_Comfort_of_VR_Lenses_1024x1024.jpg?v=1734072261",
+        "driveId": "1bvHucx7wI3LnTKxnXxtBfdrrmkLwjEyS"
     },
     {
         "title": "I Expect You To Die 3",
