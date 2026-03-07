@@ -44,10 +44,9 @@
         "size": "50 MB",
         "type": "ps1",
         "tag": "PS1 ROM",
-        "tagColor": "amber",
-        "driveId": "1MpED4Yv3J9BCFU-PbJMN1_8XKhRpCJV6",
-        "cover": "https://gamesdb.launchbox-app.com/games/images/19411-batman-forever-the-arcade-game",
-        "desc": "Over-the-top beat 'em up action. Ready to play on emulators like RetroArch."
+        "desc": "Over-the-top beat 'em up action. Ready to play on emulators like RetroArch.",
+        "cover": "https://i.ytimg.com/vi/oxZ_yRTqtW0/maxresdefault.jpg",
+        "driveId": "1MpED4Yv3J9BCFU-PbJMN1_8XKhRpCJV6"
     },
     {
         "title": "BONELAB",
