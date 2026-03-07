@@ -147,10 +147,9 @@
         "size": "1.2 GB",
         "type": "psp",
         "tag": "PSP ISO",
-        "tagColor": "blue",
-        "driveId": "1e7i85zRnqGGlXzY0bmY3l78dRiEbbdRf",
-        "cover": "https://gamesdb.launchbox-app.com/games/images/30513-fifa-soccer-06",
-        "desc": "Classic football on the go. High-speed sport action."
+        "desc": "Classic football on the go. High-speed sport action.",
+        "cover": "https://m.media-amazon.com/images/M/MV5BMzJlMTFiYjYtNmVlZS00YjRkLTllYWYtYjk5OWYwZGE5MDhiXkEyXkFqcGc@._V1_.jpg",
+        "driveId": "1e7i85zRnqGGlXzY0bmY3l78dRiEbbdRf"
     },
     {
         "title": "GoW: Chains of Olympus",
