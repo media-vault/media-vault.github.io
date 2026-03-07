@@ -1,5 +1,14 @@
 [
     {
+        "title": "partnerships",
+        "size": "compress",
+        "type": "psp",
+        "tag": "PSP ISO",
+        "desc": "",
+        "cover": "Avon",
+        "driveId": "circuit"
+    },
+    {
         "title": "Geometry Dash",
         "size": "300 MB",
         "type": "pc",
