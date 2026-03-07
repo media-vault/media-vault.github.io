@@ -139,10 +139,9 @@
         "size": "380 MB",
         "type": "ps1",
         "tag": "PS1 ROM",
-        "tagColor": "gray",
-        "driveId": "1StGvQ63hrJKbsToYtI7jJRl7RzFwE9Sz",
-        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1017180/header.jpg",
-        "desc": "The original PlayStation experience. Escape the pursuer."
+        "desc": "The original PlayStation experience. Escape the pursuer.",
+        "cover": "https://image.api.playstation.com/vulcan/ap/rnd/202205/1307/N26XYYO7kcvuVolFOJIpLBXI.jpg",
+        "driveId": "1StGvQ63hrJKbsToYtI7jJRl7RzFwE9Sz"
     },
     {
         "title": "FIFA Soccer 06",
