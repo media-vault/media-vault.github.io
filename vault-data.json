@@ -63,10 +63,9 @@
         "size": "8 GB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
-        "driveId": "1FSADCuLMm9xeQr77yPJFX8rq7kREy2K0",
-        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/254330/header.jpg",
-        "desc": "Survival horror masterpiece rebuilt for VR. Face the Las Plagas."
+        "desc": "Survival horror masterpiece rebuilt for VR. Face the Las Plagas.",
+        "cover": "https://www.syfy.com/sites/syfy/files/2021/10/unknown_0.jpeg",
+        "driveId": "1FSADCuLMm9xeQr77yPJFX8rq7kREy2K0"
     },
     {
         "title": "FNAF: Help Wanted",
