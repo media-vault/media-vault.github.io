@@ -34,10 +34,9 @@
         "size": "400 MB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
-        "driveId": "1Re1GJTFaBy-CdD8aoF9CDQ6gV0axcfPT",
-        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2850950/header.jpg",
-        "desc": "Experience the life of a city cabbie in immersive VR."
+        "desc": "Experience the life of a city cabbie in immersive VR.",
+        "cover": "https://queststoredb.com/media/24962418896791239_cover_landscape.webp",
+        "driveId": "1Re1GJTFaBy-CdD8aoF9CDQ6gV0axcfPT"
     },
     {
         "title": "Batman Forever: Arcade",
