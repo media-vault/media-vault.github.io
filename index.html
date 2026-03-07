@@ -7,28 +7,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; transition: direction 0.3s ease; }
         .glass-card { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.05); transition: 0.3s; }
         .bg-grid { background-image: radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.03) 1px, transparent 0); background-size: 40px 40px; }
         .modal-active { transform: scale(1) !important; opacity: 1 !important; }
+        /* Fix for RTL text alignment */
+        body[dir="rtl"] .text-left { text-align: right; }
+        body[dir="rtl"] #searchInput { text-align: right; }
     </style>
 </head>
 <body class="bg-grid text-slate-200 min-h-screen pb-20">
 
 <nav class="border-b border-white/5 bg-slate-950/50 sticky top-0 z-50 backdrop-blur-md px-6 py-4 flex justify-between items-center">
     <h1 class="text-2xl font-bold text-white">Media<span class="text-blue-500">Vault</span></h1>
-    <a href="https://discord.gg/wRMFJXxG6e" target="_blank" class="bg-blue-500/10 px-4 py-2 rounded-xl text-[10px] font-bold text-blue-400 uppercase tracking-widest border border-blue-500/20 hover:bg-blue-500 hover:text-white transition-all">Discord</a>
+    <div class="flex items-center gap-4">
+        <select id="langSelect" onchange="changeLanguage()" class="bg-white/5 text-slate-300 text-[10px] font-bold px-2 py-1 rounded border border-white/10 outline-none cursor-pointer hover:bg-white/10">
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+            <option value="ar">AR</option>
+        </select>
+        <a href="https://discord.gg/wRMFJXxG6e" target="_blank" class="bg-blue-500/10 px-4 py-2 rounded-xl text-[10px] font-bold text-blue-400 uppercase tracking-widest border border-blue-500/20 hover:bg-blue-500 hover:text-white transition-all">Discord</a>
+    </div>
 </nav>
 
 <header class="max-w-7xl mx-auto px-6 pt-16 pb-12 text-center">
     <h2 class="text-5xl font-extrabold text-white mb-6">The Golden Age <br><span class="text-blue-500">In Your Pocket.</span></h2>
-    <p class="text-slate-400 text-lg mb-10">Select a title to view details and start downloading.</p>
-    <a href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-600/30">🚀 SUPPORT THE VAULT (FREE)</a>
+    <p id="subHeader" class="text-slate-400 text-lg mb-10">Select a title to view details and start downloading.</p>
+    <a id="mainAdBtn" href="https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6" target="_blank" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-600/30">🚀 SUPPORT THE VAULT (FREE)</a>
 </header>
 
 <div class="max-w-4xl mx-auto mb-10 px-6">
-    <div class="glass-card p-4 rounded-[2rem] border border-blue-500/10">
-        <p class="text-[9px] font-bold text-slate-500 uppercase tracking-[0.3em] mb-4 text-center">Sponsored Content</p>
+    <div class="glass-card p-4 rounded-[2rem] border border-blue-500/10 text-center">
+        <p id="adLabel" class="text-[9px] font-bold text-slate-500 uppercase tracking-[0.3em] mb-4">Sponsored Content</p>
         <script async="async" data-cfasync="false" src="https://pl28824399.effectivegatecpm.com/e17568324405fdb49ee507df497c76c3/invoke.js"></script>
         <div id="container-e17568324405fdb49ee507df497c76c3"></div>
     </div>
@@ -61,8 +71,8 @@
             </div>
             <p id="overlayDesc" class="text-slate-400 text-sm mb-8 leading-relaxed"></p>
             <div class="flex flex-col gap-3">
-                <a id="overlayDl" href="#" target="_blank" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white text-center font-black uppercase rounded-2xl shadow-lg shadow-blue-600/20">Download File</a>
-                <button onclick="closeOverlay()" class="text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest">Back to Vault</button>
+                <a id="overlayDl" href="#" target="_blank" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white text-center font-black uppercase rounded-2xl shadow-lg">Download File</a>
+                <button id="closeBtn" onclick="closeOverlay()" class="text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest">Back to Vault</button>
             </div>
         </div>
     </div>
@@ -70,7 +80,30 @@
 
 <script>
     let allGames = [];
+    
+    // 1. TRANSLATION DATA
+    const i18n = {
+        en: { search: "Search vault titles...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT (FREE)", download: "Download File", close: "Back to Vault", ad: "Sponsored Content", sub: "Select a title to view details and start downloading." },
+        es: { search: "Buscar títulos...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT (GRATIS)", download: "Descargar Archivo", close: "Volver al Vault", ad: "Contenido Patrocinado", sub: "Selecciona un título para ver detalles y descargar." },
+        ar: { search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع (مجاناً)", download: "تحميل الملف", close: "رجوع للقائمة", ad: "محتوى إعلاني", sub: "اختر لعبة لعرض التفاصيل وبدء التحميل" }
+    };
 
+    function changeLanguage() {
+        const lang = document.getElementById('langSelect').value;
+        const dict = i18n[lang];
+        
+        document.getElementById('searchInput').placeholder = dict.search;
+        document.getElementById('mainAdBtn').innerText = dict.support;
+        document.getElementById('overlayDl').innerText = dict.download;
+        document.getElementById('closeBtn').innerText = dict.close;
+        document.getElementById('adLabel').innerText = dict.ad;
+        document.getElementById('subHeader').innerText = dict.sub;
+        document.getElementById('typeFilter').options[0].text = dict.all;
+
+        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    }
+
+    // 2. VAULT LOGIC
     async function loadVault() {
         try {
             const res = await fetch('./vault-data.json?t=' + Date.now());
@@ -98,12 +131,7 @@
     function searchVault() {
         const query = document.getElementById('searchInput').value.toLowerCase();
         const filter = document.getElementById('typeFilter').value;
-        
-        const filtered = allGames.filter(g => {
-            const matchesSearch = g.title.toLowerCase().includes(query);
-            const matchesFilter = filter === 'all' || g.type === filter;
-            return matchesSearch && matchesFilter;
-        });
+        const filtered = allGames.filter(g => (filter === 'all' || g.type === filter) && g.title.toLowerCase().includes(query));
         renderGrid(filtered);
     }
 
@@ -114,7 +142,6 @@
         document.getElementById('overlayTag').innerText = tag;
         document.getElementById('overlayDesc').innerText = desc;
         document.getElementById('overlayDl').href = link.startsWith('http') ? link : `https://drive.google.com/uc?export=download&id=${link}`;
-        
         document.getElementById('gameOverlay').classList.replace('hidden', 'flex');
         setTimeout(() => document.getElementById('modalBox').classList.add('modal-active'), 10);
     }
@@ -130,6 +157,5 @@
 <footer class="max-w-7xl mx-auto px-6 mt-32 py-12 border-t border-white/5 text-center">
     <p class="text-slate-500 text-[10px] uppercase tracking-[0.2em] font-bold">MediaVault Archive © 2026</p>
 </footer>
-
 </body>
 </html>
