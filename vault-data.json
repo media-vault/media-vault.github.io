@@ -167,10 +167,9 @@
         "size": "1.1 GB",
         "type": "psp",
         "tag": "PSP ISO",
-        "tagColor": "blue",
-        "driveId": "1-CiqzzPIaHM8Q0O9o88wvYvEG6958dg9",
-        "cover": "https://archive.org/services/img/GodofWarGhostofSpartaUSAEnFrEs",
-        "desc": "The second brutal PSP chapter. Kratos seeks the truth."
+        "desc": "The second brutal PSP chapter. Kratos seeks the truth.",
+        "cover": "https://www.dualshockers.com/static/uploads/2010/09/Kratos-Ghost-of-Sparta-God-of-War.jpg",
+        "driveId": "1-CiqzzPIaHM8Q0O9o88wvYvEG6958dg9"
     },
     {
         "title": "Shave 'n' Stuff",
