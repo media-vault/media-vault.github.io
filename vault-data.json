@@ -101,10 +101,9 @@
         "size": "1 GB",
         "type": "quest",
         "tag": "Quest APK",
-        "tagColor": "purple",
-        "driveId": "1CFJj8n2AyAGMyclg2V3e9Z0VPMQstCp2",
-        "cover": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2296300/header.jpg",
-        "desc": "VR spy-themed escape-the-room puzzles. Stop Dr. Roxana Prism."
+        "desc": "VR spy-themed escape-the-room puzzles. Stop Dr. Roxana Prism.",
+        "cover": "https://waytoomany.games/wp-content/uploads/2023/08/I-Expect-You-To-Die-3-Cover-Image.jpg",
+        "driveId": "1CFJj8n2AyAGMyclg2V3e9Z0VPMQstCp2"
     },
     {
         "title": "GTA: Liberty City Stories",
