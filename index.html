@@ -75,9 +75,16 @@
             <p id="overlayDesc" class="text-slate-400 text-sm mb-8 leading-relaxed"></p>
             <div class="flex flex-col gap-3">
                 <a id="overlayDl" href="#" target="_blank" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white text-center font-black uppercase rounded-2xl shadow-lg">Download File</a>
-                <button id="shareBtn" onclick="copyGameLink()" class="w-full py-3 bg-white/5 hover:bg-white/10 text-white text-center font-bold uppercase rounded-xl border border-white/10 transition-all flex items-center justify-center gap-2">
-                    <span id="shareText">Share Link</span>
-                </button>
+                
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="shareBtn" onclick="copyGameLink()" class="py-3 bg-white/5 hover:bg-white/10 text-white text-center font-bold uppercase rounded-xl border border-white/10 transition-all flex items-center justify-center gap-2">
+                        <span id="shareText">Share</span>
+                    </button>
+                    <button id="reportBtn" onclick="reportLink()" class="py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-center font-bold uppercase rounded-xl border border-red-500/20 transition-all flex items-center justify-center gap-2">
+                        <span id="reportText">Report Link</span>
+                    </button>
+                </div>
+
                 <button id="closeBtn" onclick="closeOverlay()" class="text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest mt-2">Back to Vault</button>
             </div>
         </div>
@@ -89,27 +96,33 @@
 </footer>
 
 <script>
+    // ⚠️ PASTE YOUR DISCORD WEBHOOK URL HERE ⚠️
+    const DISCORD_WEBHOOK = "YOUR_WEBHOOK_URL_HERE";
+
     let allGames = [];
-    let currentOpenGame = null; // Track currently open game for re-translation
+    let currentOpenGame = null; 
     
     const i18n = {
         en: { 
             title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>',
             search: "Search vault titles...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT (FREE)", 
             download: "Download File", close: "Back to Vault", ad: "Sponsored Content", 
-            sub: "Select a title to view details and start downloading.", share: "Share Link", copied: "COPIED! ✅" 
+            sub: "Select a title to view details and start downloading.", share: "Share", 
+            copied: "COPIED! ✅", report: "Report Link", sent: "Reported! 🚨" 
         },
         es: { 
             title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>',
             search: "Buscar títulos...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT (GRATIS)", 
             download: "Descargar Archivo", close: "Volver al Vault", ad: "Contenido Patrocinado", 
-            sub: "Selecciona un título para ver detalles y descargar.", share: "Compartir enlace", copied: "¡COPIADO! ✅" 
+            sub: "Selecciona un título para ver detalles y descargar.", share: "Compartir", 
+            copied: "¡COPIADO! ✅", report: "Reportar Link", sent: "¡Enviado! 🚨" 
         },
         ar: { 
             title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>',
             search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع (مجاناً)", 
             download: "تحميل الملف", close: "رجوع للقائمة", ad: "محتوى إعلاني", 
-            sub: "اختر لعبة لعرض التفاصيل وبدء التحميل", share: "مشاركة الرابط", copied: "تم النسخ! ✅" 
+            sub: "اختر لعبة لعرض التفاصيل وبدء التحميل", share: "مشاركة", 
+            copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨" 
         }
     };
 
@@ -122,24 +135,21 @@
         const elMap = {
             'mainTitle': 'innerHTML', 'subHeader': 'innerText', 'searchInput': 'placeholder', 
             'mainAdBtn': 'innerText', 'overlayDl': 'innerText', 'shareText': 'innerText',
-            'closeBtn': 'innerText', 'adLabel': 'innerText'
+            'reportText': 'innerText', 'closeBtn': 'innerText', 'adLabel': 'innerText'
         };
 
         for (let id in elMap) {
             const el = document.getElementById(id);
-            if (el) el[elMap[id]] = dict[id === 'mainTitle' ? 'title' : id === 'searchInput' ? 'search' : id === 'mainAdBtn' ? 'support' : id === 'overlayDl' ? 'download' : id === 'closeBtn' ? 'close' : id === 'adLabel' ? 'ad' : id === 'shareText' ? 'share' : id === 'subHeader' ? 'sub' : ''];
+            if (el) el[elMap[id]] = dict[id === 'mainTitle' ? 'title' : id === 'searchInput' ? 'search' : id === 'mainAdBtn' ? 'support' : id === 'overlayDl' ? 'download' : id === 'closeBtn' ? 'close' : id === 'adLabel' ? 'ad' : id === 'shareText' ? 'share' : id === 'reportText' ? 'report' : 'sub'];
         }
         
         const filter = document.getElementById('typeFilter');
         if (filter) filter.options[0].text = dict.all;
         document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
 
-        // Update description if overlay is open
         if (currentOpenGame) {
             const game = allGames.find(g => g.title === currentOpenGame);
-            if (game) {
-                document.getElementById('overlayDesc').innerText = game.desc || "";
-            }
+            if (game) document.getElementById('overlayDesc').innerText = game.desc || "";
         }
     }
 
@@ -153,7 +163,6 @@
             checkDeepLink();
         } catch (e) { 
             console.error("Load Error:", e);
-            document.getElementById('vaultGrid').innerHTML = `<p class="text-red-500">Failed to load games. Check vault-data.json</p>`;
         }
     }
 
@@ -229,6 +238,41 @@
                 shareBtn.classList.remove('bg-blue-500/20', 'border-blue-500/50');
             }, 2000);
         });
+    }
+
+    async function reportLink() {
+        const reportBtn = document.getElementById('reportBtn');
+        const reportText = document.getElementById('reportText');
+        const lang = document.getElementById('langSelect').value;
+
+        if (DISCORD_WEBHOOK === "YOUR_WEBHOOK_URL_HERE") {
+            alert("Error: Webhook not set up.");
+            return;
+        }
+
+        const data = {
+            content: `🚨 **Broken Link Reported!**`,
+            embeds: [{
+                title: currentOpenGame,
+                description: `A user reported that the link for **${currentOpenGame}** is broken.`,
+                color: 15548997,
+                fields: [{ name: "Current URL", value: window.location.href }]
+            }]
+        };
+
+        try {
+            await fetch(DISCORD_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            
+            reportText.innerText = i18n[lang].sent;
+            reportBtn.classList.replace('text-red-400', 'text-green-400');
+            reportBtn.disabled = true;
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     loadVault();
