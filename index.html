@@ -101,12 +101,22 @@
         ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع (مجاناً)", download: "تحميل الملف", close: "رجوع للقائمة", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
     };
 
-    function triggerDownload() {
-        if (!currentDriveId) return;
-        window.open(AD_LINK, '_blank');
-        const dlLink = `https://drive.usercontent.com/download?export=download&confirm=t&id=${currentDriveId}`;
-        window.location.href = dlLink;
-    }
+// Replace your triggerDownload function with this clean version:
+function triggerDownload() {
+    if (!currentDriveId) return;
+
+    // Direct download link - no ads, no new tabs
+    const dlLink = `https://drive.google.com/uc?export=download&id=${currentDriveId}`;
+    
+    // Create a temporary link to force the download
+    const link = document.createElement('a');
+    link.href = dlLink;
+    link.setAttribute('download', ''); // Hints to the browser to download
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 
     function changeLanguage() {
         const lang = document.getElementById('langSelect').value;
