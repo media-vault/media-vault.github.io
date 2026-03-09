@@ -6,6 +6,9 @@
     <title>MediaVault | Private Repository</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <script src="https://pl28881540.effectivegatecpm.com/01/ce/19/01ce192cbb7212c8393126654c5aa4a4.js"></script>
+
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; transition: direction 0.3s ease; }
         .glass-card { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.05); transition: 0.3s; }
@@ -38,7 +41,7 @@
 </header>
 
 <div class="max-w-7xl mx-auto px-6 mb-12">
-    <div class="flex flex-col md:flex-row gap-4 justify-between items-center bg-slate-900/40 p-2 rounded-2xl border border-white/5">
+    <div class="flex flex-col md:flex-row gap-4 justify-between items-center bg-slate-900/40 p-2 rounded-2xl border border-white/5 mb-8">
         <input type="text" id="searchInput" onkeyup="searchVault()" placeholder="Search vault titles..." class="bg-transparent w-full px-6 py-3 outline-none text-white font-medium">
         <select id="typeFilter" onchange="searchVault()" class="bg-slate-800 text-white px-6 py-3 rounded-xl font-bold text-sm border border-white/10">
             <option value="all">All Platforms</option>
@@ -48,6 +51,9 @@
             <option value="ps1">PS1</option>
         </select>
     </div>
+
+    <div id="container-01ce192cbb7212c8393126654c5aa4a4" class="w-full flex justify-center py-4 min-h-[100px]">
+        </div>
 </div>
 
 <main id="vaultGrid" class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></main>
@@ -64,7 +70,7 @@
             </div>
             <p id="overlayDesc" class="text-slate-400 text-sm mb-8 leading-relaxed"></p>
             <div class="flex flex-col gap-3">
-                <a id="overlayDl" href="#" target="_blank" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white text-center font-black uppercase rounded-2xl shadow-lg">Download File</a>
+                <button onclick="triggerDownload()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white text-center font-black uppercase rounded-2xl shadow-lg transition-all">Download File</button>
                 <div class="grid grid-cols-2 gap-3">
                     <button id="shareBtn" onclick="copyGameLink()" class="py-3 bg-white/5 hover:bg-white/10 text-white text-center font-bold uppercase rounded-xl border border-white/10 transition-all"><span id="shareText">Share</span></button>
                     <button id="reportBtn" onclick="reportLink()" class="py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-center font-bold uppercase rounded-xl border border-red-500/20 transition-all"><span id="reportText">Report</span></button>
@@ -75,37 +81,35 @@
     </div>
 </div>
 
-<script src="https://publisher.linkvertise.com/cdn/linkvertise.js"></script>
 <script>
-  linkvertise(4138834, {
-    whitelist: ["drive.usercontent.com", "drive.google.com"], 
-    blacklist: ["media-vault.github.io", "discord.com"] 
-  });
-</script>
-
-<script>
-    // --- CONFIGURATION ---
     const WEBHOOK_REPORTS = "https://discord.com/api/webhooks/1480201609618391112/zXvraiW-sH1F9ksTE3fbprA91nvLi5R-2wZQRj0hJVqHXlekQHg5ZyjfAKbsPPDSSYtI";
     const WEBHOOK_REQUESTS = "https://discord.com/api/webhooks/1480205130560176220/dsoePE0ouSFmduLF6XWiYQKTny_HNa81Hw1Mz9ho2BhG7VsSfS9jbWruypxpaezHgaEg";
-    const LINKVERTISE_USER_ID = "4138834"; 
+    const AD_LINK = "https://www.effectivegatecpm.com/nu5nxhvxu?key=3c2836e0c24cca58b18b7f39e72f03c6";
 
     let allGames = [];
     let currentOpenGame = null;
+    let currentDriveId = null;
     
     const i18n = {
-        en: { title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>', search: "Search vault titles...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT (FREE)", download: "Download File", close: "Back to Vault", ad: "Sponsored Content", sub: "Select a title to view details and start downloading.", share: "Share", copied: "COPIED! ✅", report: "Report", sent: "Reported! 🚨", req: "Request Game", reqSent: "Requested! ✅", prompt: "Enter the name of the game you want:" },
-        es: { title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>', search: "Buscar títulos...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT (GRATIS)", download: "Descargar Archivo", close: "Volver al Vault", ad: "Contenido Patrocinado", sub: "Selecciona un título para ver detalles y descargar.", share: "Compartir", copied: "¡COPIADO! ✅", report: "Reportar", sent: "¡Enviado! 🚨", req: "Pedir Juego", reqSent: "¡Pedido! ✅", prompt: "Ingresa el nombre del juego que deseas:" },
-        ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع (مجاناً)", download: "تحميل الملف", close: "رجوع للقائمة", ad: "محتوى إعلاني", sub: "اختر لعبة لعرض التفاصيل وبدء التحميل", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
+        en: { title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>', search: "Search vault titles...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT (FREE)", download: "Download File", close: "Back to Vault", share: "Share", copied: "COPIED! ✅", report: "Report", sent: "Reported! 🚨", req: "Request Game", reqSent: "Requested! ✅", prompt: "Enter the name of the game you want:" },
+        es: { title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>', search: "Buscar títulos...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT (GRATIS)", download: "Descargar Archivo", close: "Volver al Vault", share: "Compartir", copied: "¡COPIADO! ✅", report: "Reportar", sent: "¡Enviado! 🚨", req: "Pedir Juego", reqSent: "¡Pedido! ✅", prompt: "Ingresa el nombre del juego que deseas:" },
+        ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع (مجاناً)", download: "تحميل الملف", close: "رجوع للقائمة", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
     };
+
+    function triggerDownload() {
+        if (!currentDriveId) return;
+        window.open(AD_LINK, '_blank');
+        const dlLink = `https://drive.usercontent.com/download?export=download&confirm=t&id=${currentDriveId}`;
+        window.location.href = dlLink;
+    }
 
     function changeLanguage() {
         const lang = document.getElementById('langSelect').value;
         const dict = i18n[lang];
-        const elMap = { 'mainTitle':'innerHTML', 'subHeader':'innerText', 'searchInput':'placeholder', 'mainAdBtn':'innerText', 'overlayDl':'innerText', 'shareText':'innerText', 'reportText':'innerText', 'closeBtn':'innerText', 'reqMainBtn':'innerText' };
-        for (let id in elMap) { if(document.getElementById(id)) document.getElementById(id)[elMap[id]] = dict[id==='mainTitle'?'title':id==='searchInput'?'search':id==='mainAdBtn'?'support':id==='overlayDl'?'download':id==='closeBtn'?'close':id==='shareText'?'share':id==='reportText'?'report':id==='reqMainBtn'?'req':'sub']; }
+        const elMap = { 'mainTitle':'innerHTML', 'subHeader':'innerText', 'searchInput':'placeholder', 'mainAdBtn':'innerText', 'shareText':'innerText', 'reportText':'innerText', 'closeBtn':'innerText', 'reqMainBtn':'innerText' };
+        for (let id in elMap) { if(document.getElementById(id)) document.getElementById(id)[elMap[id]] = dict[id==='mainTitle'?'title':id==='searchInput'?'search':id==='mainAdBtn'?'support':id==='closeBtn'?'close':id==='shareText'?'share':id==='reportText'?'report':id==='reqMainBtn'?'req':'sub']; }
         document.getElementById('typeFilter').options[0].text = dict.all;
         document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        if (currentOpenGame) { const g = allGames.find(x => x.title === currentOpenGame); if(g) document.getElementById('overlayDesc').innerText = g.desc || ""; }
     }
 
     async function loadVault() {
@@ -148,21 +152,13 @@
 
     function openOverlay(title, img, size, tag, desc, driveId) {
         currentOpenGame = title;
+        currentDriveId = driveId;
         document.getElementById('overlayTitle').innerText = title;
         document.getElementById('overlayImg').src = img;
         document.getElementById('overlaySize').innerText = size;
         document.getElementById('overlayTag').innerText = tag;
         document.getElementById('overlayDesc').innerText = desc || "";
-
-        // 1. Build Direct Force-Download Link for Google Drive
-        const targetUrl = `https://drive.usercontent.com/download?export=download&confirm=t&id=${driveId}`;
         
-        // 2. Encode for Linkvertise Dynamic Redirect
-        const encodedTarget = btoa(targetUrl);
-        
-        // 3. Set the Linkvertise Ad URL
-        document.getElementById('overlayDl').href = `https://link-target.net/${LINKVERTISE_USER_ID}/dynamic?r=${encodedTarget}`;
-
         const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?game=' + encodeURIComponent(title);
         window.history.pushState({path:newUrl}, '', newUrl);
         document.getElementById('gameOverlay').classList.replace('hidden', 'flex');
@@ -171,6 +167,7 @@
 
     function closeOverlay() {
         currentOpenGame = null;
+        currentDriveId = null;
         document.getElementById('modalBox').classList.remove('modal-active');
         const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
         window.history.pushState({path:cleanUrl}, '', cleanUrl);
@@ -210,16 +207,12 @@
         const lang = document.getElementById('langSelect').value;
         const game = prompt(i18n[lang].prompt);
         if (!game) return;
-        
         const res = await fetch(WEBHOOK_REQUESTS, { 
             method: 'POST', 
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify({ 
                 content: `📫 **NEW GAME REQUEST**`,
-                embeds: [{
-                    description: `User requested: **${game}**`,
-                    color: 3447003
-                }]
+                embeds: [{ description: `User requested: **${game}**`, color: 3447003 }]
             }) 
         });
         if(res.ok) alert(i18n[lang].reqSent);
