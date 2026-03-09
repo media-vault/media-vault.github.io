@@ -76,144 +76,154 @@
 </div>
 
 <script>
-    // --- WEBHOOK CONFIGURATION ---
-    const WEBHOOK_REPORTS = "https://discord.com/api/webhooks/1480201609618391112/zXvraiW-sH1F9ksTE3fbprA91nvLi5R-2wZQRj0hJVqHXlekQHg5ZyjfAKbsPPDSSYtI";
-    const WEBHOOK_REQUESTS = "https://discord.com/api/webhooks/1480205130560176220/dsoePE0ouSFmduLF6XWiYQKTny_HNa81Hw1Mz9ho2BhG7VsSfS9jbWruypxpaezHgaEg";
+// --- CONFIGURATION ---
+const WEBHOOK_REPORTS = "https://discord.com/api/webhooks/1480201609618391112/zXvraiW-sH1F9ksTE3fbprA91nvLi5R-2wZQRj0hJVqHXlekQHg5ZyjfAKbsPPDSSYtI";
+const WEBHOOK_REQUESTS = "https://discord.com/api/webhooks/1480205130560176220/dsoePE0ouSFmduLF6XWiYQKTny_HNa81Hw1Mz9ho2BhG7VsSfS9jbWruypxpaezHgaEg";
+const LINKVERTISE_USER_ID = "4138834"; // <--- PASTE YOUR LINKVERTISE ID NUMBER HERE
 
-    let allGames = [];
-    let currentOpenGame = null;
+let allGames = [];
+let currentOpenGame = null;
+
+const i18n = {
+    en: { title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>', search: "Search vault titles...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT (FREE)", download: "Download File", close: "Back to Vault", ad: "Sponsored Content", sub: "Select a title to view details and start downloading.", share: "Share", copied: "COPIED! ✅", report: "Report", sent: "Reported! 🚨", req: "Request Game", reqSent: "Requested! ✅", prompt: "Enter the name of the game you want:" },
+    es: { title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>', search: "Buscar títulos...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT (GRATIS)", download: "Descargar Archivo", close: "Volver al Vault", ad: "Contenido Patrocinado", sub: "Selecciona un título para ver detalles y descargar.", share: "Compartir", copied: "¡COPIADO! ✅", report: "Reportar", sent: "¡Enviado! 🚨", req: "Pedir Juego", reqSent: "¡Pedido! ✅", prompt: "Ingresa el nombre del juego que deseas:" },
+    ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع (مجاناً)", download: "تحميل الملف", close: "رجوع للقائمة", ad: "محتوى إعلاني", sub: "اختر لعبة لعرض التفاصيل وبدء التحميل", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
+};
+
+function changeLanguage() {
+    const lang = document.getElementById('langSelect').value;
+    const dict = i18n[lang];
+    const elMap = { 'mainTitle':'innerHTML', 'subHeader':'innerText', 'searchInput':'placeholder', 'mainAdBtn':'innerText', 'overlayDl':'innerText', 'shareText':'innerText', 'reportText':'innerText', 'closeBtn':'innerText', 'reqMainBtn':'innerText' };
+    for (let id in elMap) { if(document.getElementById(id)) document.getElementById(id)[elMap[id]] = dict[id==='mainTitle'?'title':id==='searchInput'?'search':id==='mainAdBtn'?'support':id==='overlayDl'?'download':id==='closeBtn'?'close':id==='shareText'?'share':id==='reportText'?'report':id==='reqMainBtn'?'req':'sub']; }
+    document.getElementById('typeFilter').options[0].text = dict.all;
+    document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    if (currentOpenGame) { const g = allGames.find(x => x.title === currentOpenGame); if(g) document.getElementById('overlayDesc').innerText = g.desc || ""; }
+}
+
+async function loadVault() {
+    try {
+        const res = await fetch('./vault-data.json?t=' + Date.now());
+        allGames = await res.json();
+        renderGrid(allGames);
+        changeLanguage(); 
+        checkDeepLink();
+    } catch (e) { console.error(e); }
+}
+
+function renderGrid(games) {
+    const grid = document.getElementById('vaultGrid');
+    if (!grid) return;
+    const now = new Date();
+    grid.innerHTML = games.map(game => {
+        const isNew = game.date && (now - new Date(game.date)) / (1000 * 60 * 60 * 24) < 3;
+        return `
+        <div class="group glass-card rounded-[2rem] overflow-hidden cursor-pointer hover:border-blue-500/50 hover:-translate-y-2 relative" 
+             onclick="openOverlay('${game.title.replace(/'/g, "\\'")}', '${game.cover}', '${game.size}', '${game.tag}', '${(game.desc || "").replace(/'/g, "\\'")}', '${game.driveId || ""}')">
+            ${isNew ? '<span class="absolute top-4 right-4 z-10 bg-blue-500 text-white text-[9px] font-black px-2 py-1 rounded-lg new-badge shadow-lg shadow-blue-500/50">NEW</span>' : ''}
+            <div class="relative h-48 overflow-hidden">
+                <img src="${game.cover || 'https://via.placeholder.com/460x215'}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
+            </div>
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-white group-hover:text-blue-400">${game.title}</h3>
+                <p class="text-slate-500 text-[10px] font-bold mt-1 uppercase tracking-widest">${game.tag} • ${game.size}</p>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function searchVault() {
+    const q = document.getElementById('searchInput').value.toLowerCase();
+    const f = document.getElementById('typeFilter').value;
+    renderGrid(allGames.filter(g => (f === 'all' || g.type === f) && g.title.toLowerCase().includes(q)));
+}
+
+function openOverlay(title, img, size, tag, desc, driveId) {
+    currentOpenGame = title;
+    document.getElementById('overlayTitle').innerText = title;
+    document.getElementById('overlayImg').src = img;
+    document.getElementById('overlaySize').innerText = size;
+    document.getElementById('overlayTag').innerText = tag;
+    document.getElementById('overlayDesc').innerText = desc || "";
+
+    // 1. Generate Force-Download Direct Link (Skips Google virus warning)
+    const directLink = `https://drive.usercontent.com/download?export=download&confirm=t&id=${driveId}`;
     
-    const i18n = {
-        en: { title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>', search: "Search vault titles...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT (FREE)", download: "Download File", close: "Back to Vault", ad: "Sponsored Content", sub: "Select a title to view details and start downloading.", share: "Share", copied: "COPIED! ✅", report: "Report", sent: "Reported! 🚨", req: "Request Game", reqSent: "Requested! ✅", prompt: "Enter the name of the game you want:" },
-        es: { title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>', search: "Buscar títulos...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT (GRATIS)", download: "Descargar Archivo", close: "Volver al Vault", ad: "Contenido Patrocinado", sub: "Selecciona un título para ver detalles y descargar.", share: "Compartir", copied: "¡COPIADO! ✅", report: "Reportar", sent: "¡Enviado! 🚨", req: "Pedir Juego", reqSent: "¡Pedido! ✅", prompt: "Ingresa el nombre del juego que deseas:" },
-        ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع (مجاناً)", download: "تحميل الملف", close: "رجوع للقائمة", ad: "محتوى إعلاني", sub: "اختر لعبة لعرض التفاصيل وبدء التحميل", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
-    };
+    // 2. Wrap in Linkvertise Dynamic URL
+    // This tells Linkvertise: "After the ad, send them straight to this direct link"
+    const adLink = `https://link-target.net/${LINKVERTISE_USER_ID}/dynamic/?r=${btoa(directLink)}`;
+    
+    document.getElementById('overlayDl').href = adLink;
 
-    function changeLanguage() {
-        const lang = document.getElementById('langSelect').value;
-        const dict = i18n[lang];
-        const elMap = { 'mainTitle':'innerHTML', 'subHeader':'innerText', 'searchInput':'placeholder', 'mainAdBtn':'innerText', 'overlayDl':'innerText', 'shareText':'innerText', 'reportText':'innerText', 'closeBtn':'innerText', 'reqMainBtn':'innerText' };
-        for (let id in elMap) { if(document.getElementById(id)) document.getElementById(id)[elMap[id]] = dict[id==='mainTitle'?'title':id==='searchInput'?'search':id==='mainAdBtn'?'support':id==='overlayDl'?'download':id==='closeBtn'?'close':id==='shareText'?'share':id==='reportText'?'report':id==='reqMainBtn'?'req':'sub']; }
-        document.getElementById('typeFilter').options[0].text = dict.all;
-        document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
-        if (currentOpenGame) { const g = allGames.find(x => x.title === currentOpenGame); if(g) document.getElementById('overlayDesc').innerText = g.desc || ""; }
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?game=' + encodeURIComponent(title);
+    window.history.pushState({path:newUrl}, '', newUrl);
+    document.getElementById('gameOverlay').classList.replace('hidden', 'flex');
+    setTimeout(() => document.getElementById('modalBox').classList.add('modal-active'), 10);
+}
+
+function closeOverlay() {
+    currentOpenGame = null;
+    document.getElementById('modalBox').classList.remove('modal-active');
+    const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState({path:cleanUrl}, '', cleanUrl);
+    setTimeout(() => document.getElementById('gameOverlay').classList.replace('flex', 'hidden'), 300);
+}
+
+function copyGameLink() {
+    const lang = document.getElementById('langSelect').value;
+    navigator.clipboard.writeText(window.location.href).then(() => {
+        document.getElementById('shareText').innerText = i18n[lang].copied;
+        setTimeout(() => { document.getElementById('shareText').innerText = i18n[lang].share; }, 2000);
+    });
+}
+
+async function reportLink() {
+    if (!WEBHOOK_REPORTS.startsWith('http')) return alert("Reports Webhook not configured.");
+    const lang = document.getElementById('langSelect').value;
+    const res = await fetch(WEBHOOK_REPORTS, { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify({ 
+            content: "🚨 **BROKEN LINK REPORTED**", 
+            embeds: [{ 
+                title: currentOpenGame, 
+                color: 15548997, 
+                description: "This game link is down.",
+                fields: [{ name: "Direct URL", value: window.location.href }] 
+            }] 
+        }) 
+    });
+    if(res.ok) { 
+        document.getElementById('reportText').innerText = i18n[lang].sent; 
+        document.getElementById('reportBtn').disabled = true; 
     }
+}
 
-    async function loadVault() {
-        try {
-            const res = await fetch('./vault-data.json?t=' + Date.now());
-            allGames = await res.json();
-            renderGrid(allGames);
-            changeLanguage(); 
-            checkDeepLink();
-        } catch (e) { console.error(e); }
-    }
+async function requestGame() {
+    const lang = document.getElementById('langSelect').value;
+    const game = prompt(i18n[lang].prompt);
+    if (!game || !WEBHOOK_REQUESTS.startsWith('http')) return;
+    
+    const res = await fetch(WEBHOOK_REQUESTS, { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify({ 
+            content: `📫 **NEW GAME REQUEST**`,
+            embeds: [{
+                description: `User requested: **${game}**`,
+                color: 3447003
+            }]
+        }) 
+    });
+    if(res.ok) alert(i18n[lang].reqSent);
+}
 
-    function renderGrid(games) {
-        const grid = document.getElementById('vaultGrid');
-        if (!grid) return;
-        const now = new Date();
-        grid.innerHTML = games.map(game => {
-            const isNew = game.date && (now - new Date(game.date)) / (1000 * 60 * 60 * 24) < 3;
-            return `
-            <div class="group glass-card rounded-[2rem] overflow-hidden cursor-pointer hover:border-blue-500/50 hover:-translate-y-2 relative" 
-                 onclick="openOverlay('${game.title.replace(/'/g, "\\'")}', '${game.cover}', '${game.size}', '${game.tag}', '${(game.desc || "").replace(/'/g, "\\'")}', '${game.url || game.driveId || ""}')">
-                ${isNew ? '<span class="absolute top-4 right-4 z-10 bg-blue-500 text-white text-[9px] font-black px-2 py-1 rounded-lg new-badge shadow-lg shadow-blue-500/50">NEW</span>' : ''}
-                <div class="relative h-48 overflow-hidden">
-                    <img src="${game.cover || 'https://via.placeholder.com/460x215'}" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-500 group-hover:scale-110">
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold text-white group-hover:text-blue-400">${game.title}</h3>
-                    <p class="text-slate-500 text-[10px] font-bold mt-1 uppercase tracking-widest">${game.tag} • ${game.size}</p>
-                </div>
-            </div>`;
-        }).join('');
-    }
+function checkDeepLink() {
+    const g = new URLSearchParams(window.location.search).get('game');
+    if (g) { const game = allGames.find(x => x.title === g); if (game) openOverlay(game.title, game.cover, game.size, game.tag, game.desc, game.driveId); }
+}
 
-    function searchVault() {
-        const q = document.getElementById('searchInput').value.toLowerCase();
-        const f = document.getElementById('typeFilter').value;
-        renderGrid(allGames.filter(g => (f === 'all' || g.type === f) && g.title.toLowerCase().includes(q)));
-    }
-
-    function openOverlay(title, img, size, tag, desc, link) {
-        currentOpenGame = title;
-        document.getElementById('overlayTitle').innerText = title;
-        document.getElementById('overlayImg').src = img;
-        document.getElementById('overlaySize').innerText = size;
-        document.getElementById('overlayTag').innerText = tag;
-        document.getElementById('overlayDesc').innerText = desc || "";
-        document.getElementById('overlayDl').href = link.startsWith('http') ? link : `https://drive.google.com/uc?export=download&id=${link}`;
-        const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?game=' + encodeURIComponent(title);
-        window.history.pushState({path:newUrl}, '', newUrl);
-        document.getElementById('gameOverlay').classList.replace('hidden', 'flex');
-        setTimeout(() => document.getElementById('modalBox').classList.add('modal-active'), 10);
-    }
-
-    function closeOverlay() {
-        currentOpenGame = null;
-        document.getElementById('modalBox').classList.remove('modal-active');
-        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-        window.history.pushState({path:cleanUrl}, '', cleanUrl);
-        setTimeout(() => document.getElementById('gameOverlay').classList.replace('flex', 'hidden'), 300);
-    }
-
-    function copyGameLink() {
-        const lang = document.getElementById('langSelect').value;
-        navigator.clipboard.writeText(window.location.href).then(() => {
-            document.getElementById('shareText').innerText = i18n[lang].copied;
-            setTimeout(() => { document.getElementById('shareText').innerText = i18n[lang].share; }, 2000);
-        });
-    }
-
-    async function reportLink() {
-        if (!WEBHOOK_REPORTS.startsWith('http')) return alert("Reports Webhook not configured.");
-        const lang = document.getElementById('langSelect').value;
-        const res = await fetch(WEBHOOK_REPORTS, { 
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' }, 
-            body: JSON.stringify({ 
-                content: "🚨 **BROKEN LINK REPORTED**", 
-                embeds: [{ 
-                    title: currentOpenGame, 
-                    color: 15548997, 
-                    description: "This game link is down.",
-                    fields: [{ name: "Direct URL", value: window.location.href }] 
-                }] 
-            }) 
-        });
-        if(res.ok) { 
-            document.getElementById('reportText').innerText = i18n[lang].sent; 
-            document.getElementById('reportBtn').disabled = true; 
-        }
-    }
-
-    async function requestGame() {
-        const lang = document.getElementById('langSelect').value;
-        const game = prompt(i18n[lang].prompt);
-        if (!game || !WEBHOOK_REQUESTS.startsWith('http')) return;
-        
-        const res = await fetch(WEBHOOK_REQUESTS, { 
-            method: 'POST', 
-            headers: { 'Content-Type': 'application/json' }, 
-            body: JSON.stringify({ 
-                content: `📫 **NEW GAME REQUEST**`,
-                embeds: [{
-                    description: `User requested: **${game}**`,
-                    color: 3447003
-                }]
-            }) 
-        });
-        if(res.ok) alert(i18n[lang].reqSent);
-    }
-
-    function checkDeepLink() {
-        const g = new URLSearchParams(window.location.search).get('game');
-        if (g) { const game = allGames.find(x => x.title === g); if (game) openOverlay(game.title, game.cover, game.size, game.tag, game.desc, (game.url || game.driveId || "")); }
-    }
-
-    loadVault();
+loadVault();
 </script>
 </body>
 </html>
