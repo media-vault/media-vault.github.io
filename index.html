@@ -214,9 +214,13 @@
 
     function copyGameLink() {
         const lang = document.getElementById('langSelect').value;
-        navigator.clipboard.writeText(window.location.href).then(() => {
-            document.getElementById('shareText').innerText = i18n[lang].copied;
-            setTimeout(() => document.getElementById('shareText').innerText = i18n[lang].share, 2000);
+        // This creates a URL like: yoursite.com/?game=Spider-Man
+        const shareUrl = window.location.origin + window.location.pathname + '?game=' + encodeURIComponent(currentOpenGame);
+        
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            const shareText = document.getElementById('shareText');
+            shareText.innerText = i18n[lang].copied;
+            setTimeout(() => { shareText.innerText = i18n[lang].share; }, 2000);
         });
     }
 
@@ -242,9 +246,18 @@
         if(res.ok) alert(i18n[lang].reqSent);
     }
 
-    function checkDeepLink() {
-        const g = new URLSearchParams(window.location.search).get('game');
-        if (g) { const game = allGames.find(x => x.title === g); if (game) openOverlay(game.title, game.cover, game.size, game.tag, game.desc, game.driveId); }
+      function checkDeepLink() {
+        const params = new URLSearchParams(window.location.search);
+        const gameTitle = params.get('game');
+        
+        if (gameTitle) {
+            // Find the game in your JSON data
+            const game = allGames.find(x => x.title === decodeURIComponent(gameTitle));
+            if (game) {
+                // Open the modal immediately
+                openOverlay(game.title, game.cover, game.size, game.tag, game.desc, game.driveId);
+            }
+        }
     }
 
     loadVault();
