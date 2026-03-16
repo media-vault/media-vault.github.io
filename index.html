@@ -9,7 +9,6 @@
     
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; transition: direction 0.3s ease; }
-        /* Performance optimized for 1.80GHz CPUs */
         .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); border: 1px solid rgba(59, 130, 246, 0.05); transition: 0.2s ease; }
         .bg-grid { background-image: radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.03) 1px, transparent 0); background-size: 40px 40px; }
         .modal-active { transform: scale(1) !important; opacity: 1 !important; }
@@ -29,7 +28,7 @@
             <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
         </div>
         <h2 class="text-2xl font-bold text-white mb-2 uppercase tracking-tighter">Vault Locked</h2>
-        <p class="text-slate-400 text-sm mb-6 uppercase tracking-wider">Unlock the repository to view data nodes.</p>
+        <p class="text-slate-400 text-sm mb-6 uppercase tracking-wider">Unlock the repository to view files.</p>
         <button id="unlockBtn" onclick="startUnlock()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase rounded-2xl shadow-lg shadow-blue-600/20 transition-all">
             🚀 Unlock Now
         </button>
@@ -51,7 +50,7 @@
 
     <header class="max-w-7xl mx-auto px-6 pt-12 md:pt-16 pb-12 text-center">
         <h2 id="mainTitle" class="text-3xl md:text-5xl font-extrabold text-white mb-6 uppercase tracking-tight">The Golden Age <br><span class="text-blue-500">In Your Pocket.</span></h2>
-        <p id="subHeader" class="text-slate-400 text-base md:text-lg mb-10 uppercase tracking-widest font-light">Decrypt data nodes and initialize downloads.</p>
+        <p id="subHeader" class="text-slate-400 text-base md:text-lg mb-10 uppercase tracking-widest font-light">Access the directory and start downloading.</p>
         <button onclick="triggerAdOnly()" id="mainAdBtn" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-600/30">🚀 SUPPORT THE VAULT</button>
     </header>
 
@@ -73,7 +72,7 @@
 <div id="gameOverlay" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
     <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeOverlay()"></div>
     <div id="modalBox" class="relative w-full max-w-lg bg-[#0d1117] border border-blue-500/20 rounded-[2.5rem] overflow-hidden shadow-2xl scale-90 opacity-0 transition-all duration-200">
-        <img id="overlayImg" src="" class="w-full h-48 md:h-56 object-cover grayscale hover:grayscale-0 transition-all">
+        <img id="overlayImg" src="" class="w-full h-48 md:h-56 object-cover transition-all">
         <div class="p-6 md:p-8">
             <h2 id="overlayTitle" class="text-2xl md:text-3xl font-black uppercase text-white mb-2 leading-tight tracking-tighter"></h2>
             <div class="flex flex-wrap gap-2 mb-4">
@@ -102,9 +101,9 @@
     let currentDriveId = null;
 
     const i18n = {
-        en: { title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>', subHeader: "Decrypt data nodes and initialize downloads.", search: "Search directory...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT", download: "Download File", wait: "INIT ", unlock: "DECRYPT NODE 🔓", close: "Back to Vault", share: "Share", copied: "COPIED! ✅", report: "Report", sent: "Reported! 🚨", req: "Request Game", reqSent: "Requested! ✅", prompt: "Enter title for entry request:" },
-        es: { title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>', subHeader: "Descifra nodos de datos e inicia descargas.", search: "Buscar directorio...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT", download: "Descargar Archivo", wait: "CARGA ", unlock: "DESBLOQUEAR 🔓", close: "Volver al Vault", share: "Compartir", copied: "¡COPIADO! ✅", report: "Reportar", sent: "¡Enviado! 🚨", req: "Pedir Juego", reqSent: "¡Pedido! ✅", prompt: "Nombre del juego solicitado:" },
-        ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', subHeader: "فك تشفير العناوين وابدأ التحميل.", search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع", download: "تحميل الملف", wait: "انتظار ", unlock: "فتح التحميل 🔓", close: "رجوع للقائمة", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
+        en: { title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>', subHeader: "Access the directory and start downloading.", search: "Search directory...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT", download: "Download File", wait: "READY IN ", unlock: "UNLOCK DOWNLOAD 🔓", close: "Back to Vault", share: "Share", copied: "COPIED! ✅", report: "Report", sent: "Reported! 🚨", req: "Request Game", reqSent: "Requested! ✅", prompt: "Enter title for entry request:" },
+        es: { title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>', subHeader: "Accede al directorio e inicia descargas.", search: "Buscar directorio...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT", download: "Descargar Archivo", wait: "LISTO EN ", unlock: "DESBLOQUEAR 🔓", close: "Volver al Vault", share: "Compartir", copied: "¡COPIADO! ✅", report: "Reportar", sent: "¡Enviado! 🚨", req: "Pedir Juego", reqSent: "¡Pedido! ✅", prompt: "Nombre del juego solicitado:" },
+        ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', subHeader: "تصفح القائمة وابدأ التحميل.", search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع", download: "تحميل الملف", wait: "جاهز خلال ", unlock: "فتح التحميل 🔓", close: "رجوع للقائمة", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
     };
 
     function startUnlock() {
@@ -122,14 +121,13 @@
                 document.getElementById('mainContent').classList.remove('is-blurred');
                 setTimeout(() => document.getElementById('adGuard').remove(), 500);
             } else {
-                unlockBtn.innerText = (i18n[lang].wait || "WAIT ") + timeLeft + "s...";
+                unlockBtn.innerText = (i18n[lang].wait || "READY IN ") + timeLeft + "s...";
             }
         }, 1000);
     }
 
     function triggerAdOnly() { window.open(AD_LINK, '_blank'); }
 
-    // DOWNLOAD TRIGGER (CLEAN - NO AD)
     function triggerDownload() {
         if (!currentDriveId) return;
         window.location.href = `https://drive.google.com/uc?export=download&id=${currentDriveId}`;
@@ -164,7 +162,7 @@
             <div class="group glass-card rounded-[2rem] overflow-hidden cursor-pointer" 
                  onclick="openOverlayByIndex(${index})">
                 <div class="relative h-48 overflow-hidden">
-                    <img src="${game.cover}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    <img src="${game.cover}" class="w-full h-full object-cover transition-all duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
                 </div>
                 <div class="p-6">
@@ -193,7 +191,7 @@
         document.getElementById('overlayImg').src = img;
         document.getElementById('overlaySize').innerText = size;
         document.getElementById('overlayTag').innerText = tag;
-        document.getElementById('overlayDesc').innerText = desc || "NODATA_AVAILABLE";
+        document.getElementById('overlayDesc').innerText = desc || "No description available.";
         const dlBtn = document.getElementById('downloadBtn');
         dlBtn.disabled = true;
         dlBtn.style.opacity = "0.5";
