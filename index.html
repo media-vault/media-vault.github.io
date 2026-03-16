@@ -9,15 +9,14 @@
     
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #020617; transition: direction 0.3s ease; }
-        .glass-card { background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(59, 130, 246, 0.05); transition: 0.3s; }
+        /* Performance optimized for 1.80GHz CPUs */
+        .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); border: 1px solid rgba(59, 130, 246, 0.05); transition: 0.2s ease; }
         .bg-grid { background-image: radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.03) 1px, transparent 0); background-size: 40px 40px; }
         .modal-active { transform: scale(1) !important; opacity: 1 !important; }
         
-        /* THE GUARD STYLES */
-        #mainContent.is-blurred { filter: blur(25px); pointer-events: none; user-select: none; }
-        #adGuard { backdrop-filter: blur(12px); transition: all 0.5s ease; }
+        #mainContent.is-blurred { filter: blur(15px); pointer-events: none; user-select: none; }
+        #adGuard { backdrop-filter: blur(10px); transition: all 0.4s ease; }
         
-        /* RTL Support */
         body[dir="rtl"] .text-left { text-align: right; }
         body[dir="rtl"] #searchInput { text-align: right; }
     </style>
@@ -29,38 +28,37 @@
         <div class="w-16 h-16 bg-blue-600/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
         </div>
-        <h2 class="text-2xl font-bold text-white mb-2">Vault Locked</h2>
-        <p class="text-slate-400 text-sm mb-6">Support the vault to unlock access to the full repository.</p>
+        <h2 class="text-2xl font-bold text-white mb-2 uppercase tracking-tighter">Vault Locked</h2>
+        <p class="text-slate-400 text-sm mb-6 uppercase tracking-wider">Unlock the repository to view data nodes.</p>
         <button id="unlockBtn" onclick="startUnlock()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-black uppercase rounded-2xl shadow-lg shadow-blue-600/20 transition-all">
-            🚀 Unlock Now (Free)
+            🚀 Unlock Now
         </button>
-        <p class="text-[10px] text-slate-500 mt-4 uppercase tracking-widest">Safe & Ad-Network Verified</p>
     </div>
 </div>
 
 <div id="mainContent" class="is-blurred">
-    <nav class="border-b border-white/5 bg-slate-950/50 sticky top-0 z-50 backdrop-blur-md px-4 md:px-8 py-4 flex justify-between items-center">
-        <h1 class="text-xl md:text-2xl font-bold text-white cursor-pointer" onclick="window.location.reload()">Media<span class="text-blue-500">Vault</span></h1>
+    <nav class="border-b border-white/5 bg-slate-950/80 sticky top-0 z-50 backdrop-blur-md px-4 md:px-8 py-4 flex justify-between items-center">
+        <h1 class="text-xl md:text-2xl font-bold text-white tracking-tighter cursor-pointer" onclick="window.location.reload()">MEDIA<span class="text-blue-500">VAULT</span></h1>
         <div class="flex items-center gap-2 md:gap-4">
             <select id="langSelect" onchange="changeLanguage()" class="bg-white/5 text-slate-300 text-[10px] font-bold px-2 py-1 rounded border border-white/10 outline-none">
                 <option value="en">EN</option>
                 <option value="es">ES</option>
                 <option value="ar">AR</option>
             </select>
-            <button onclick="requestGame()" id="reqMainBtn" class="bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded border border-blue-500/20 uppercase">Request Game</button>
+            <button onclick="requestGame()" id="reqMainBtn" class="bg-blue-600/10 hover:bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded border border-blue-500/20 uppercase">Request</button>
         </div>
     </nav>
 
     <header class="max-w-7xl mx-auto px-6 pt-12 md:pt-16 pb-12 text-center">
-        <h2 id="mainTitle" class="text-3xl md:text-5xl font-extrabold text-white mb-6">The Golden Age <br><span class="text-blue-500">In Your Pocket.</span></h2>
-        <p id="subHeader" class="text-slate-400 text-base md:text-lg mb-10">Select a title to view details and start downloading.</p>
-        <button onclick="triggerAdOnly()" id="mainAdBtn" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-600/30">🚀 SUPPORT THE VAULT (FREE)</button>
+        <h2 id="mainTitle" class="text-3xl md:text-5xl font-extrabold text-white mb-6 uppercase tracking-tight">The Golden Age <br><span class="text-blue-500">In Your Pocket.</span></h2>
+        <p id="subHeader" class="text-slate-400 text-base md:text-lg mb-10 uppercase tracking-widest font-light">Decrypt data nodes and initialize downloads.</p>
+        <button onclick="triggerAdOnly()" id="mainAdBtn" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl transition-all shadow-xl shadow-blue-600/30">🚀 SUPPORT THE VAULT</button>
     </header>
 
     <div class="max-w-7xl mx-auto px-6 mb-12">
         <div class="flex flex-col md:flex-row gap-4 justify-between items-center bg-slate-900/40 p-2 rounded-2xl border border-white/5 mb-8">
-            <input type="text" id="searchInput" onkeyup="searchVault()" placeholder="Search vault titles..." class="bg-transparent w-full px-6 py-3 outline-none text-white font-medium">
-            <select id="typeFilter" onchange="searchVault()" class="w-full md:w-auto bg-slate-800 text-white px-6 py-3 rounded-xl font-bold text-sm border border-white/10">
+            <input type="text" id="searchInput" onkeyup="searchVault()" placeholder="Search directory..." class="bg-transparent w-full px-6 py-3 outline-none text-white font-medium uppercase text-xs tracking-widest">
+            <select id="typeFilter" onchange="searchVault()" class="w-full md:w-auto bg-slate-800 text-white px-6 py-3 rounded-xl font-bold text-xs uppercase border border-white/10">
                 <option value="all">All Platforms</option>
                 <option value="pc">PC Games</option>
                 <option value="quest">Meta Quest</option>
@@ -73,23 +71,22 @@
 </div>
 
 <div id="gameOverlay" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
-    <div class="absolute inset-0 bg-black/80 backdrop-blur-xl" onclick="closeOverlay()"></div>
-    <div id="modalBox" class="relative w-full max-w-lg bg-[#0d1117] border border-white/10 rounded-[2.5rem] overflow-hidden shadow-2xl scale-90 opacity-0 transition-all duration-300 max-h-[90vh] overflow-y-auto md:overflow-visible">
-        <img id="overlayImg" src="" class="w-full h-48 md:h-56 object-cover">
+    <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="closeOverlay()"></div>
+    <div id="modalBox" class="relative w-full max-w-lg bg-[#0d1117] border border-blue-500/20 rounded-[2.5rem] overflow-hidden shadow-2xl scale-90 opacity-0 transition-all duration-200">
+        <img id="overlayImg" src="" class="w-full h-48 md:h-56 object-cover grayscale hover:grayscale-0 transition-all">
         <div class="p-6 md:p-8">
-            <h2 id="overlayTitle" class="text-2xl md:text-3xl font-black italic uppercase text-white mb-2 leading-tight"></h2>
+            <h2 id="overlayTitle" class="text-2xl md:text-3xl font-black uppercase text-white mb-2 leading-tight tracking-tighter"></h2>
             <div class="flex flex-wrap gap-2 mb-4">
                 <span id="overlaySize" class="bg-blue-600/20 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full border border-blue-500/30"></span>
-                <span id="overlayTag" class="bg-white/5 text-gray-400 text-[10px] px-3 py-1 rounded-full border border-white/10"></span>
+                <span id="overlayTag" class="bg-white/5 text-gray-400 text-[10px] px-3 py-1 rounded-full border border-white/10 uppercase"></span>
             </div>
-            <p id="overlayDesc" class="text-slate-400 text-sm mb-8 leading-relaxed"></p>
+            <p id="overlayDesc" class="text-slate-400 text-sm mb-8 leading-relaxed font-light"></p>
             <div class="flex flex-col gap-3">
-                <button id="downloadBtn" onclick="triggerDownload()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white text-center font-black uppercase rounded-2xl shadow-lg transition-all">Download File</button>
+                <button id="downloadBtn" onclick="triggerDownload()" class="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white text-center font-black uppercase rounded-2xl shadow-lg transition-all tracking-widest text-xs">Download File</button>
                 <div class="grid grid-cols-2 gap-3">
-                    <button onclick="copyGameLink()" class="py-3 bg-white/5 hover:bg-white/10 text-white text-center font-bold uppercase rounded-xl border border-white/10 transition-all"><span id="shareText">Share</span></button>
-                    <button id="reportBtn" onclick="reportLink()" class="py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-center font-bold uppercase rounded-xl border border-red-500/20 transition-all"><span id="reportText">Report</span></button>
+                    <button onclick="copyGameLink()" class="py-3 bg-white/5 hover:bg-white/10 text-white text-center font-bold uppercase rounded-xl border border-white/10 transition-all text-[10px]">Share</button>
+                    <button id="reportBtn" onclick="reportLink()" class="py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 text-center font-bold uppercase rounded-xl border border-red-500/20 transition-all text-[10px]">Report</button>
                 </div>
-                <button id="closeBtn" onclick="closeOverlay()" class="text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest mt-2">Back to Vault</button>
             </div>
         </div>
     </div>
@@ -105,9 +102,9 @@
     let currentDriveId = null;
 
     const i18n = {
-        en: { title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>', subHeader: "Select a title to view details and start downloading.", search: "Search vault titles...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT (FREE)", download: "Download File", wait: "WAIT ", unlock: "UNLOCK DOWNLOAD 🔓", close: "Back to Vault", share: "Share", copied: "COPIED! ✅", report: "Report", sent: "Reported! 🚨", req: "Request Game", reqSent: "Requested! ✅", prompt: "Enter the name of the game you want:" },
-        es: { title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>', subHeader: "Selecciona un título para ver detalles y comenzar la descarga.", search: "Buscar títulos...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT (GRATIS)", download: "Descargar Archivo", wait: "ESPERA ", unlock: "DESBLOQUEAR 🔓", close: "Volver al Vault", share: "Compartir", copied: "¡COPIADO! ✅", report: "Reportar", sent: "¡Enviado! 🚨", req: "Pedir Juego", reqSent: "¡Pedido! ✅", prompt: "Ingresa el nombre del juego que deseas:" },
-        ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', subHeader: "اختر عنواناً لعرض التفاصيل وبدء التحميل.", search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع (مجاناً)", download: "تحميل الملف", wait: "انتظر ", unlock: "فتح التحميل 🔓", close: "رجوع للقائمة", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
+        en: { title: 'The Golden Age <br><span class="text-blue-500">In Your Pocket.</span>', subHeader: "Decrypt data nodes and initialize downloads.", search: "Search directory...", all: "All Platforms", support: "🚀 SUPPORT THE VAULT", download: "Download File", wait: "INIT ", unlock: "DECRYPT NODE 🔓", close: "Back to Vault", share: "Share", copied: "COPIED! ✅", report: "Report", sent: "Reported! 🚨", req: "Request Game", reqSent: "Requested! ✅", prompt: "Enter title for entry request:" },
+        es: { title: 'La Edad de Oro <br><span class="text-blue-500">En Tu Bolsillo.</span>', subHeader: "Descifra nodos de datos e inicia descargas.", search: "Buscar directorio...", all: "Todas las plataformas", support: "🚀 APOYA EL VAULT", download: "Descargar Archivo", wait: "CARGA ", unlock: "DESBLOQUEAR 🔓", close: "Volver al Vault", share: "Compartir", copied: "¡COPIADO! ✅", report: "Reportar", sent: "¡Enviado! 🚨", req: "Pedir Juego", reqSent: "¡Pedido! ✅", prompt: "Nombre del juego solicitado:" },
+        ar: { title: 'العصر الذهبي <br><span class="text-blue-500">في جيبك.</span>', subHeader: "فك تشفير العناوين وابدأ التحميل.", search: "البحث في القائمة...", all: "جميع الأجهزة", support: "🚀 ادعم الموقع", download: "تحميل الملف", wait: "انتظار ", unlock: "فتح التحميل 🔓", close: "رجوع للقائمة", share: "مشاركة", copied: "تم النسخ! ✅", report: "إبلاغ", sent: "تم الإبلاغ! 🚨", req: "طلب لعبة", reqSent: "تم الطلب! ✅", prompt: "أدخل اسم اللعبة التي تريدها:" }
     };
 
     function startUnlock() {
@@ -132,9 +129,9 @@
 
     function triggerAdOnly() { window.open(AD_LINK, '_blank'); }
 
+    // DOWNLOAD TRIGGER (CLEAN - NO AD)
     function triggerDownload() {
         if (!currentDriveId) return;
-        window.open(AD_LINK, '_blank');
         window.location.href = `https://drive.google.com/uc?export=download&id=${currentDriveId}`;
     }
 
@@ -145,9 +142,6 @@
         document.getElementById('subHeader').innerText = dict.subHeader;
         document.getElementById('searchInput').placeholder = dict.search;
         document.getElementById('mainAdBtn').innerText = dict.support;
-        document.getElementById('shareText').innerText = dict.share;
-        document.getElementById('reportText').innerText = dict.report;
-        document.getElementById('closeBtn').innerText = dict.close;
         document.getElementById('reqMainBtn').innerText = dict.req;
         document.getElementById('typeFilter').options[0].text = dict.all;
         document.body.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -160,22 +154,22 @@
             renderGrid(allGames);
             checkDeepLink();
         } catch (e) {
-            console.error("Data load error. Ensure vault-data.json exists.");
+            console.error("Data load error.");
         }
     }
 
     function renderGrid(games) {
         const grid = document.getElementById('vaultGrid');
         grid.innerHTML = games.map((game, index) => `
-            <div class="group glass-card rounded-[2rem] overflow-hidden cursor-pointer hover:border-blue-500/50 hover:-translate-y-2 relative" 
+            <div class="group glass-card rounded-[2rem] overflow-hidden cursor-pointer" 
                  onclick="openOverlayByIndex(${index})">
                 <div class="relative h-48 overflow-hidden">
-                    <img src="${game.cover}" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500">
+                    <img src="${game.cover}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     <div class="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent"></div>
                 </div>
                 <div class="p-6">
-                    <h3 class="text-xl font-bold text-white group-hover:text-blue-400">${game.title}</h3>
-                    <p class="text-slate-500 text-[10px] font-bold mt-1 uppercase tracking-widest">${game.tag} • ${game.size}</p>
+                    <h3 class="text-xl font-bold text-white uppercase tracking-tighter">${game.title}</h3>
+                    <p class="text-blue-500 text-[9px] font-black mt-1 uppercase tracking-[0.2em]">${game.tag} • ${game.size}</p>
                 </div>
             </div>`).join('');
     }
@@ -188,8 +182,7 @@
     function searchVault() {
         const q = document.getElementById('searchInput').value.toLowerCase();
         const f = document.getElementById('typeFilter').value;
-        const filtered = allGames.filter(g => (f === 'all' || g.type === f) && g.title.toLowerCase().includes(q));
-        renderGrid(filtered);
+        renderGrid(allGames.filter(g => (f === 'all' || g.type === f) && g.title.toLowerCase().includes(q)));
     }
 
     function openOverlay(title, img, size, tag, desc, driveId) {
@@ -200,12 +193,11 @@
         document.getElementById('overlayImg').src = img;
         document.getElementById('overlaySize').innerText = size;
         document.getElementById('overlayTag').innerText = tag;
-        document.getElementById('overlayDesc').innerText = desc || "";
+        document.getElementById('overlayDesc').innerText = desc || "NODATA_AVAILABLE";
         const dlBtn = document.getElementById('downloadBtn');
         dlBtn.disabled = true;
         dlBtn.style.opacity = "0.5";
         let timeLeft = 3;
-        dlBtn.innerText = i18n[lang].wait + timeLeft + "s...";
         const timer = setInterval(() => {
             timeLeft--;
             if (timeLeft <= 0) {
@@ -223,27 +215,21 @@
 
     function closeOverlay() {
         document.getElementById('modalBox').classList.remove('modal-active');
-        setTimeout(() => document.getElementById('gameOverlay').classList.replace('flex', 'hidden'), 300);
+        setTimeout(() => document.getElementById('gameOverlay').classList.replace('flex', 'hidden'), 200);
     }
 
     function copyGameLink() {
-        const lang = document.getElementById('langSelect').value;
-        const shareUrl = window.location.origin + window.location.pathname + '?game=' + encodeURIComponent(currentOpenGame);
-        navigator.clipboard.writeText(shareUrl).then(() => {
-            const shareText = document.getElementById('shareText');
-            shareText.innerText = i18n[lang].copied;
-            setTimeout(() => { shareText.innerText = i18n[lang].share; }, 2000);
-        });
+        const url = window.location.origin + window.location.pathname + '?game=' + encodeURIComponent(currentOpenGame);
+        navigator.clipboard.writeText(url).then(() => alert("Linked!"));
     }
 
     async function reportLink() {
-        const lang = document.getElementById('langSelect').value;
         await fetch(WEBHOOK_REPORTS, { 
             method: 'POST', 
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify({ content: "🚨 **BROKEN LINK**", embeds: [{ title: currentOpenGame, color: 15548997 }] }) 
         });
-        document.getElementById('reportText').innerText = i18n[lang].sent;
+        alert("Reported!");
     }
 
     async function requestGame() {
@@ -255,7 +241,7 @@
             headers: { 'Content-Type': 'application/json' }, 
             body: JSON.stringify({ content: `📫 **REQUEST**: ${game}` }) 
         });
-        alert(i18n[lang].reqSent);
+        alert("Logged!");
     }
 
     function checkDeepLink() {
