@@ -1,14 +1,5 @@
 [
     {
-        "title": "",
-        "size": "",
-        "type": "pc",
-        "tag": "PC Game",
-        "desc": "",
-        "cover": "https://via.placeholder.com/460x215?text=No+Cover",
-        "driveId": ""
-    },
-    {
         "title": "Gang Beasts",
         "size": "1 GB",
         "type": "pc",
